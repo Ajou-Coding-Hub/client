@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import GuidePage from "@/pages/GuidePage";
-import Header from "@/components/ui/Header";
+import Header from "@/components/organisms/Header";
 
 function App() {
   return (
