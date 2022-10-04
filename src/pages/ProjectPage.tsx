@@ -1,8 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
-import CreateProjectModal from "@/components/organisms/CreateProjectModal";
 import { classNames } from "@/utils/class";
 import { TerminalIcon, CubeTransparentIcon } from "@heroicons/react/outline";
-import { useState } from "react";
 
 const items = [
   {
@@ -20,11 +18,8 @@ const items = [
 ];
 
 function ProjectPage() {
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="px-56 py-10">
-      <CreateProjectModal open={open} onClose={() => setOpen(false)} />
       <h2 className="text-lg font-medium text-gray-900">Projects 🚀</h2>
       <p className="mt-1 text-sm text-gray-500">
         프로젝트를 만들어서 배포까지 해보세요.
@@ -34,7 +29,7 @@ function ProjectPage() {
         className="mt-6 border-t border-b border-gray-200 py-6 grid grid-cols-1 gap-6 sm:grid-cols-2"
       >
         {items.map((item, itemIdx) => (
-          <li key={itemIdx} className="flow-root" onClick={() => setOpen(true)}>
+          <li key={itemIdx} className="flow-root">
             <div className="relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-gray-50 focus-within:ring-2 focus-within:ring-indigo-500">
               <div
                 className={classNames(

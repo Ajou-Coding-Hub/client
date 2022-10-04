@@ -4,6 +4,7 @@ import LoginPage from "@/pages/LoginPage";
 import GuideSolvingPage from "@/pages/GuideSolvingPage";
 import GuidePage from "@/pages/GuidePage";
 import ProjectPage from "@/pages/ProjectPage";
+import ContainerPage from "./pages/ContainerPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path=":problemId" element={<GuideSolvingPage />} />
             <Route index element={<GuidePage />} />
           </Route>
+          <Route path="Container" element={<ContainerPage />} />
 
           <Route path="/login" element={<LoginPage />} />
         </Routes>

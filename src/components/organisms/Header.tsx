@@ -41,6 +41,9 @@ function Header() {
                   <Link to={"/guide"} className={currentPathClass("/guide")}>
                     Guide
                   </Link>
+                  <Link to={"/Container"} className={currentPathClass("/Container")}>
+                    Container
+                  </Link>
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">

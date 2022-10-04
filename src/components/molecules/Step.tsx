@@ -8,20 +8,15 @@ interface StepProps {
 
 export function StepWrapper({
   children,
-  title,
 }: {
-  title: string;
   children: React.ReactNode | React.ReactNode[];
 }) {
   return (
-    <div>
-      <h1 className="mb-5 font-bold text-indigo-700">{title}</h1>
-      <nav className="flex" aria-label="Progress">
-        <ol role="list" className="space-y-6">
-          {children}
-        </ol>
-      </nav>
-    </div>
+    <nav className="flex justify-center" aria-label="Progress">
+      <ol role="list" className="space-y-6">
+        {children}
+      </ol>
+    </nav>
   );
 }
 
