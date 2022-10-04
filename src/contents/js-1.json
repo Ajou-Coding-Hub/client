@@ -1,0 +1,15 @@
+{
+  "name": "자바스크립트 1장",
+  "step": [
+    {
+      "name": "main.js 만들기",
+      "type": "filename",
+      "expect": "main.js"
+    },
+    {
+      "name": "Hello World 출력하기",
+      "type": "code",
+      "expect": "console.log('Hello World')"
+    }
+  ]
+}
