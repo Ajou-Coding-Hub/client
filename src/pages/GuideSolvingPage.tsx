@@ -30,13 +30,23 @@ function GuideSolvingPage() {
       <div className="relative w-2/3">
         <iframe src={vscodeUrl} className="h-full w-full" />
       </div>
-      <div className="p-5">
-        <StepWrapper>
-          {steps.map((step) => (
-            <Step status={step.status}>{step.name}</Step>
-          ))}
-        </StepWrapper>
-        <Button className="absolute bottom-5 right-10 w-100">다음 문제</Button>
+      <div className="w-1/3">
+        <iframe
+          className="w-full h-1/3"
+          src="https://www.youtube.com/embed/CSWc0HYjxEs"
+          title="자바스크립트에서 가장 이상한 문법"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        ></iframe>
+        <div className="p-5">
+          <StepWrapper title="자바스크립트 기초">
+            {steps.map((step) => (
+              <Step status={step.status}>{step.name}</Step>
+            ))}
+          </StepWrapper>
+          <Button className="absolute bottom-5 right-10 w-100">
+            다음 문제
+          </Button>
+        </div>
       </div>
     </div>
   );
