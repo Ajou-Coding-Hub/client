@@ -45,15 +45,17 @@ const team = [
   },
 ];
 
-function CreateProjectModal() {
-  const [open, setOpen] = useState(true);
-
+interface CreateProjectModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+function CreateProjectModal({ open, onClose }: CreateProjectModalProps) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 overflow-hidden"
-        onClose={setOpen}
+        onClose={onClose}
       >
         <div className="absolute inset-0 overflow-hidden">
           <Dialog.Overlay className="absolute inset-0" />
@@ -80,7 +82,7 @@ function CreateProjectModal() {
                           <button
                             type="button"
                             className="bg-indigo-700 rounded-md text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                           >
                             <span className="sr-only">Close panel</span>
                             <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -290,7 +292,7 @@ function CreateProjectModal() {
                     <button
                       type="button"
                       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={() => setOpen(false)}
+                      onClick={onClose}
                     >
                       Cancel
                     </button>
