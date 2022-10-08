@@ -1,4 +1,5 @@
 import Button from "@/components/atoms/Button";
+import Markdown from "@/components/molecules/Markdown";
 import Step, { StepWrapper } from "@/components/molecules/Step";
 import useStep from "@/hooks/useStep";
 
@@ -9,6 +10,25 @@ const vscodeUrl =
 const USER_NAME = "gron1gh1";
 
 // --------
+const markdown = `
+# Hello
+## Hello !
+### Hello !
+#### Hello !
+##### Hello !
+###### Hello !
+
+
+~asd~
+
+
+헬로 월드
+~~~js
+console.log('Hello World');
+~~~
+[Step-1]
+
+`;
 
 function GuideSolvingPage() {
   const steps = useStep(USER_NAME, [
@@ -38,6 +58,7 @@ function GuideSolvingPage() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
         <div className="p-5">
+          <Markdown markdown={markdown} />
           <StepWrapper title="자바스크립트 기초">
             {steps.map((step) => (
               <Step status={step.status}>{step.name}</Step>
