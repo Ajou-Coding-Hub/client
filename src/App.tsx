@@ -9,14 +9,13 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="h-[calc(100vh_-_64px)] mt-0.5">
+      <div className="h-[calc(100vh_-_64px)] mt-0.5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <Routes>
           <Route path="/" element={<ProjectPage />} />
           <Route path="guide">
             <Route path=":problemId" element={<GuideSolvingPage />} />
             <Route index element={<GuidePage />} />
           </Route>
-
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>

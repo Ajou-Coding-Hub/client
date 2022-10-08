@@ -12,7 +12,7 @@ const items = [
     background: "bg-indigo-500",
   },
   {
-    title: "파이썬 기초",
+    title: "Create a Terminal",
     description: "개인용 터미널을 만듭니다.",
     icon: TerminalIcon,
     background: "bg-purple-500",
@@ -23,7 +23,7 @@ function ProjectPage() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="px-56 py-10">
+    <div>
       <CreateProjectModal open={open} onClose={() => setOpen(false)} />
       <h2 className="text-lg font-medium text-gray-900">Projects 🚀</h2>
       <p className="mt-1 text-sm text-gray-500">
