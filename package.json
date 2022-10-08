@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "latest",
     "@heroicons/react": "v1",
+    "@uiw/react-md-editor": "^3.18.2",
     "axios": "^0.27.2",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.1.12",

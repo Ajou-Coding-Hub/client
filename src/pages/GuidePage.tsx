@@ -1,11 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
-import Box from "@/components/atoms/Box";
 import Button from "@/components/atoms/Button";
 import GuideBox from "@/components/organisms/GuideBox";
 import StartingPoint from "@/components/organisms/StartingPoint";
 import { SiJavascript, SiPython, SiTypescript } from "react-icons/si";
 import { Carousel } from "flowbite-react";
 import Padding from "@/components/atoms/Padding";
+import { useNavigate } from "react-router";
 
 // 서버 데이터 베이스로 저장
 const items = [
@@ -126,10 +126,14 @@ function GuideStartingPoint() {
   );
 }
 function GuidePage() {
+  const navigate = useNavigate();
+
   return (
     <Padding className="relative">
-      <Button className="absolute top-5 right-10">문제 업로드</Button>
       <GuideCarousel />
+      <div className="flex justify-end mb-3">
+        <Button onClick={() => navigate("upload")}>문제 업로드</Button>
+      </div>
       <GuideMenu />
       <GuideStartingPoint />
     </Padding>

@@ -41,12 +41,6 @@ function GuideSolvingPage() {
         <iframe src={vscodeUrl} className="h-full w-full" />
       </div>
       <div className="w-1/3">
-        <iframe
-          className="w-full h-1/3"
-          src="https://www.youtube.com/embed/CSWc0HYjxEs"
-          title="자바스크립트에서 가장 이상한 문법"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
         <div className="p-5">
           <GuideMarkdown markdown={markdown} step={steps} />
           <Button className="absolute bottom-5 right-10 w-100">

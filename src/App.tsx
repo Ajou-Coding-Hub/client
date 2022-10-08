@@ -4,6 +4,7 @@ import LoginPage from "@/pages/LoginPage";
 import GuideSolvingPage from "@/pages/GuideSolvingPage";
 import GuidePage from "@/pages/GuidePage";
 import ProjectPage from "@/pages/ProjectPage";
+import GuideUploadPage from "./pages/GuideUploadPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ProjectPage />} />
           <Route path="guide">
+            <Route path="upload" element={<GuideUploadPage />} />
             <Route path=":problemId" element={<GuideSolvingPage />} />
             <Route index element={<GuidePage />} />
           </Route>
