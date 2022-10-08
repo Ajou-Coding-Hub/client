@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="h-[calc(100vh_-_64px)] mt-0.5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div className="h-[calc(100vh_-_64px)]">
         <Routes>
           <Route path="/" element={<ProjectPage />} />
           <Route path="guide">

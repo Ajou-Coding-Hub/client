@@ -1,4 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
+import Padding from "@/components/atoms/Padding";
 import CreateProjectModal from "@/components/organisms/CreateProjectModal";
 import { classNames } from "@/utils/class";
 import { TerminalIcon, CubeTransparentIcon } from "@heroicons/react/outline";
@@ -23,7 +24,7 @@ function ProjectPage() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
+    <Padding>
       <CreateProjectModal open={open} onClose={() => setOpen(false)} />
       <h2 className="text-lg font-medium text-gray-900">Projects 🚀</h2>
       <p className="mt-1 text-sm text-gray-500">
@@ -58,7 +59,7 @@ function ProjectPage() {
           </li>
         ))}
       </ul>
-    </div>
+    </Padding>
   );
 }
 

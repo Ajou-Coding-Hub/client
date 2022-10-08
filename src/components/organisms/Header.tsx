@@ -36,10 +36,16 @@ function Header() {
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   <Link to={"/"} className={currentPathClass("/")}>
-                    Projects
+                    프로젝트
                   </Link>
                   <Link to={"/guide"} className={currentPathClass("/guide")}>
-                    Guide
+                    가이드
+                  </Link>
+                  <Link
+                    to={"/container"}
+                    className={currentPathClass("/container")}
+                  >
+                    컨테이너 관리
                   </Link>
                 </div>
               </div>

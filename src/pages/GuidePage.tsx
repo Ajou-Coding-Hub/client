@@ -5,6 +5,7 @@ import GuideBox from "@/components/organisms/GuideBox";
 import StartingPoint from "@/components/organisms/StartingPoint";
 import { SiJavascript, SiPython, SiTypescript } from "react-icons/si";
 import { Carousel } from "flowbite-react";
+import Padding from "@/components/atoms/Padding";
 
 // 서버 데이터 베이스로 저장
 const items = [
@@ -49,55 +50,64 @@ const items2 = [
   },
 ];
 
-function GuidePage() {
+function GuideCarousel() {
   return (
-    <div className="relative">
-      <Button className="absolute top-5 right-10">문제 업로드</Button>
-      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 mb-5">
-        <Carousel>
-          <img
-            src="/new.png"
-            alt="new"
-            className="object-contain h-full bg-[#3949AB]"
-          />
-          <img
-            src="/logo2.png"
-            alt="logo2"
-            className="object-contain h-full bg-[#1B2528]"
-          />
-        </Carousel>
+    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 mb-10">
+      <Carousel>
+        <img
+          src="/new.png"
+          alt="new"
+          className="object-contain h-full bg-[#3949AB]"
+        />
+        <img
+          src="/logo2.png"
+          alt="logo2"
+          className="object-contain h-full bg-[#1B2528]"
+        />
+      </Carousel>
+    </div>
+  );
+}
+
+function GuideMenu() {
+  return (
+    <div className="flex flex-col gap-3 mb-10">
+      <div className="flex gap-3">
+        <GuideBox
+          title="단어장 만들기"
+          author="강선규"
+          level={3}
+          onClick={() => alert("ASD")}
+          className="flex-1"
+        />
+        <GuideBox
+          title="단어장 만들기"
+          author="강선규"
+          level={1}
+          className="flex-1"
+        />
       </div>
-      <div className="flex flex-col gap-3 mb-5">
-        <div className="flex gap-3">
-          <GuideBox
-            title="단어장 만들기"
-            author="강선규"
-            level={3}
-            onClick={() => alert("ASD")}
-            className="flex-1"
-          />
-          <GuideBox
-            title="단어장 만들기"
-            author="강선규"
-            level={1}
-            className="flex-1"
-          />
-        </div>
-        <div className="flex gap-3">
-          <GuideBox
-            title="단어장 만들기"
-            author="강선규"
-            level={2}
-            className="flex-1"
-          />
-          <GuideBox
-            title="단어장 만들기"
-            author="강선규"
-            level={3}
-            className="flex-1"
-          />
-        </div>
+      <div className="flex gap-3">
+        <GuideBox
+          title="단어장 만들기"
+          author="강선규"
+          level={2}
+          className="flex-1"
+        />
+        <GuideBox
+          title="단어장 만들기"
+          author="강선규"
+          level={3}
+          className="flex-1"
+        />
       </div>
+    </div>
+  );
+}
+
+function GuideStartingPoint() {
+  return (
+    <div>
       <div className="mb-5">
         <StartingPoint
           items={items}
@@ -113,6 +123,16 @@ function GuidePage() {
         />
       </div>
     </div>
+  );
+}
+function GuidePage() {
+  return (
+    <Padding className="relative">
+      <Button className="absolute top-5 right-10">문제 업로드</Button>
+      <GuideCarousel />
+      <GuideMenu />
+      <GuideStartingPoint />
+    </Padding>
   );
 }
 
