@@ -1,33 +1,14 @@
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import React from "react";
 
-interface StepProps {
+export interface StepProps {
   children: React.ReactNode;
   status: "complete" | "current" | "upcoming";
 }
 
-export function StepWrapper({
-  children,
-  title,
-}: {
-  title: string;
-  children: React.ReactNode | React.ReactNode[];
-}) {
-  return (
-    <div>
-      <h1 className="mb-5 font-bold text-indigo-700">{title}</h1>
-      <nav className="flex" aria-label="Progress">
-        <ol role="list" className="space-y-6">
-          {children}
-        </ol>
-      </nav>
-    </div>
-  );
-}
-
 function Step({ children, status }: StepProps) {
   return (
-    <li>
+    <li className="list-none my-3">
       {status === "complete" ? (
         <span className="flex items-start">
           <span className="flex-shrink-0 relative h-5 w-5 flex items-center justify-center">

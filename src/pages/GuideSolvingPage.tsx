@@ -1,7 +1,6 @@
 import Button from "@/components/atoms/Button";
-import Markdown from "@/components/molecules/Markdown";
-import Step, { StepWrapper } from "@/components/molecules/Step";
 import useStep from "@/hooks/useStep";
+import GuideMarkdown from "@/components/organisms/GuideMarkdown";
 
 /** 임시 데이터 */
 const vscodeUrl =
@@ -11,23 +10,14 @@ const USER_NAME = "gron1gh1";
 
 // --------
 const markdown = `
-# Hello
-## Hello !
-### Hello !
-#### Hello !
-##### Hello !
-###### Hello !
+## 자바스크립트 기초
+asd
 
+[STEP-1]  
+asd
 
-~asd~
-
-
-헬로 월드
-~~~js
-console.log('Hello World');
-~~~
-[Step-1]
-
+[STEP-2]  
+* 문제를 풀어봅시다
 `;
 
 function GuideSolvingPage() {
@@ -58,12 +48,7 @@ function GuideSolvingPage() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
         <div className="p-5">
-          <Markdown markdown={markdown} />
-          <StepWrapper title="자바스크립트 기초">
-            {steps.map((step) => (
-              <Step status={step.status}>{step.name}</Step>
-            ))}
-          </StepWrapper>
+          <GuideMarkdown markdown={markdown} step={steps} />
           <Button className="absolute bottom-5 right-10 w-100">
             다음 문제
           </Button>
