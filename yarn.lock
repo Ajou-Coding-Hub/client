@@ -604,6 +604,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-table@npm:^8.5.15":
+  version: 8.5.15
+  resolution: "@tanstack/react-table@npm:8.5.15"
+  dependencies:
+    "@tanstack/table-core": 8.5.15
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 1d80268eca88fd847dd8d8d86ef4b0a5e19945497497679026d74b907cf39739a22ea75929a4f2ce1a623af42d2a6b3d248a459eeda637b7d68e391a09ce1afc
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.5.15":
+  version: 8.5.15
+  resolution: "@tanstack/table-core@npm:8.5.15"
+  checksum: 03d63e126e843375c2950809d680cd670694cfbee4e3cdc8ca463d97ba64cadd11ee9addf000ab4cb20d35ffb668df5f50cb205c594dc6ef2d0942005662d0ce
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -1421,6 +1440,7 @@ __metadata:
   dependencies:
     "@headlessui/react": latest
     "@heroicons/react": v1
+    "@tanstack/react-table": ^8.5.15
     "@types/node": ^18.8.0
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
