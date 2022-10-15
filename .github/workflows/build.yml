@@ -17,8 +17,9 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
 
     - uses: actions/setup-node@v3
       with:
@@ -33,9 +34,11 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2 
       with:
-        context: ./docker/Dockerfile
         push: true
-        tags: thswlsgur98/app:latest
+        context: .
+        file: ./docker/Dockerfile
+        tags: |
+          ghcr.io/${{ github.repository_owner }}/my-container-test:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
