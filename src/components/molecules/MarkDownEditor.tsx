@@ -1,5 +1,7 @@
 import { defaultComponents } from "@/utils/markdown";
 import MDEditor, { ContextStore } from "@uiw/react-md-editor";
+import { SpecialComponents } from "react-markdown/lib/ast-to-react";
+import { NormalComponents } from "react-markdown/lib/complex-types";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -13,8 +15,11 @@ interface MarkDownEditorProps {
         state?: ContextStore | undefined
       ) => void)
     | undefined;
+  components?: Partial<
+    Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents
+  >;
 }
-function MarkDownEditor({ value, onChange }: MarkDownEditorProps) {
+function MarkDownEditor({ value, onChange, components }: MarkDownEditorProps) {
   return (
     <div data-color-mode="light">
       <MDEditor
@@ -24,6 +29,7 @@ function MarkDownEditor({ value, onChange }: MarkDownEditorProps) {
         onChange={onChange}
         previewOptions={{
           components: {
+            ...components,
             ...defaultComponents,
           },
           remarkPlugins: [remarkGfm, remarkMath],
