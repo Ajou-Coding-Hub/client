@@ -77,7 +77,7 @@ jobs:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
         channel-id: "C0468FV9M63"
-        update-ts: ${{ steps.slack.outputs.ts }}
+        update-ts: ${{ steps.slack_message.outputs.ts }}
         payload: |
           {
             "text": "Build Finish (Client)",
