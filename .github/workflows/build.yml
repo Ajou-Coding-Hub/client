@@ -9,7 +9,34 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    - id: slack_message
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # The following message update step does not accept a channel name.
+        # Setting a channel ID here for consistency is highly recommended.
+        channel-id: "C0468FV9M63"
+        payload: |
+          {
+            "text": "Build Start (Client)",
+            "attachments": [
+              {
+                "pretext": "Deployment started",
+                "color": "dbab09",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "In Progress"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        
     - uses: actions/checkout@v3
+
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -20,6 +47,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
+
 
     - uses: actions/setup-node@v3
       with:
@@ -43,3 +71,29 @@ jobs:
         cache-to: type=gha,mode=max
 
     # Deploy K8s
+
+    - uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # The following message update step does not accept a channel name.
+        # Setting a channel ID here for consistency is highly recommended.
+        channel-id: "C0468FV9M63"
+        update-ts: ${{ steps.slack.outputs.ts }}
+        payload: |
+          {
+            "text": "Build Finish (Client)",
+            "attachments": [
+              {
+                "pretext": "Deployment finished",
+                "color": "28a745",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "Completed"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
