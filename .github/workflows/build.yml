@@ -72,10 +72,41 @@ jobs:
 
     # Deploy K8s
 
+
+    - name: onFailure
+      if: failure()
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # The following message update step does not accept a channel name.
+        # Setting a channel ID here for consistency is highly recommended.
+        channel-id: "C0468FV9M63"
+        update-ts: ${{ steps.slack_message.outputs.ts }}
+        payload: |
+          {
+            "text": "Build Error (Client)",
+            "attachments": [
+              {
+                "pretext": "Error occured",
+                "color": "28a745",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "Error"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+
     - uses: slackapi/slack-github-action@v1.23.0
       with:
         # The following message update step does not accept a channel name.
         # Setting a channel ID here for consistency is highly recommended.
+        channel-id: "C0468FV9M63"
         update-ts: ${{ steps.slack_message.outputs.ts }}
         payload: |
           {
