@@ -11,8 +11,11 @@ import {
 } from "@tanstack/react-table";
 import { StepType } from "@/hooks/useStep";
 import Step from "@/components/molecules/Step";
+import Level from "@/components/atoms/Level";
+import { classNames } from "@/utils/class";
+import Language from "@/components/atoms/Language";
 
-const guideTemplate = `## 문제 가이드
+const guideTemplate = `## 가이드 가이드
 
 위에서 설정한 스텝을 어디에 위치할지 정해주셔야해요 !  
 **[STEP-(number)]** 와 같은 형식으로 (number) 안에 스텝의 숫자를 작성하면 해당 위치에 스텝에 위치합니다.
@@ -222,15 +225,98 @@ function GuideUploadPage() {
   ]);
 
   const [value, setValue] = React.useState(guideTemplate);
-
+  const [selectLevel, setLevel] = React.useState<1 | 2 | 3>(1);
+  const [selectLang, setLang] = React.useState<
+    "python" | "javascript" | "typescript"
+  >("python");
   return (
     <Padding>
       <div>
-        <h1 className="text-sm mb-3 font-bold">문제 스텝 설정</h1>
+        <h1 className="text-sm mb-3 font-bold">가이드 기본 설정</h1>
+        <div className="p-3 mb-5">
+          <label
+            htmlFor="title"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            가이드 제목
+          </label>
+          <input
+            type="title"
+            id="name"
+            className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+          />
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            가이드 언어 설정
+          </label>
+          <div className="flex gap-5 mb-3">
+            <div
+              className={classNames(
+                "cursor-pointer",
+                selectLang === "python" && "opacity-50"
+              )}
+              onClick={() => setLang("python")}
+            >
+              <Language lang="python" />
+            </div>
+            <div
+              className={classNames(
+                "cursor-pointer",
+                selectLang === "javascript" && "opacity-50"
+              )}
+              onClick={() => setLang("javascript")}
+            >
+              <Language lang="javascript" />
+            </div>
+            <div
+              className={classNames(
+                "cursor-pointer",
+                selectLang === "typescript" && "opacity-50"
+              )}
+              onClick={() => setLang("typescript")}
+            >
+              <Language lang="typescript" />
+            </div>
+          </div>
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            가이드 레벨 설정
+          </label>
+          <div className="flex gap-5 mb-3">
+            <div
+              className={classNames(
+                "cursor-pointer",
+                selectLevel === 1 && "opacity-50"
+              )}
+              onClick={() => setLevel(1)}
+            >
+              <Level level={1} />
+            </div>
+            <div
+              className={classNames(
+                "cursor-pointer",
+                selectLevel === 2 && "opacity-50"
+              )}
+              onClick={() => setLevel(2)}
+            >
+              <Level level={2} />
+            </div>
+            <div
+              className={classNames(
+                "cursor-pointer",
+                selectLevel === 3 && "opacity-50"
+              )}
+              onClick={() => setLevel(3)}
+            >
+              <Level level={3} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1 className="text-sm mb-3 font-bold">가이드 스텝 설정</h1>
         <SetStepView data={data} setData={setData} />
       </div>
       <div>
-        <h2 className="text-sm font-bold mb-3">문제 설명 마크다운 설정</h2>
+        <h2 className="text-sm font-bold mb-3">가이드 설명 마크다운 설정</h2>
         <div>
           <MarkDownEditor
             value={value}
