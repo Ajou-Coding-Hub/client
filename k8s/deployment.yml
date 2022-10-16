@@ -16,6 +16,7 @@ spec:
           image: ghcr.io/ajou-coding-hub/client:latest
           ports:
             - containerPort: 80
+          imagePullPolicy: Always
       imagePullSecrets:
         - name: ghcr-login-secret
 
