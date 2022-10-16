@@ -12,9 +12,9 @@ import {
 import { StepType } from "@/hooks/useStep";
 import Step from "@/components/molecules/Step";
 import Level from "@/components/atoms/Level";
-import { classNames } from "@/utils/class";
 import Language from "@/components/atoms/Language";
 import ClickableOpacity from "@/components/atoms/ClickableOpacity";
+import { GuideLangType } from "@/types";
 
 const guideTemplate = `## 가이드
 
@@ -210,8 +210,6 @@ function SetStepView({ data, setData }: any) {
   );
 }
 
-type langType = "python" | "javascript" | "typescript";
-
 function GuideUploadPage() {
   const [data, setData] = useState<StepColumn[]>([
     {
@@ -230,7 +228,7 @@ function GuideUploadPage() {
 
   const [value, setValue] = React.useState(guideTemplate);
   const [selectLevel, setLevel] = React.useState<1 | 2 | 3>(1);
-  const [selectLang, setLang] = React.useState<langType>("python");
+  const [selectLang, setLang] = React.useState<GuideLangType>("python");
   return (
     <Padding>
       <div>
@@ -251,7 +249,7 @@ function GuideUploadPage() {
             가이드 언어 설정
           </label>
           <div className="flex gap-5 mb-3">
-            {(["python", "javascript", "typescript"] as langType[]).map(
+            {(["python", "javascript", "typescript"] as GuideLangType[]).map(
               (lang) => (
                 <ClickableOpacity
                   clicked={selectLang === lang}
