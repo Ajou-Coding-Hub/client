@@ -14,8 +14,9 @@ import Step from "@/components/molecules/Step";
 import Level from "@/components/atoms/Level";
 import { classNames } from "@/utils/class";
 import Language from "@/components/atoms/Language";
+import ClickableOpacity from "@/components/atoms/ClickableOpacity";
 
-const guideTemplate = `## 가이드 가이드
+const guideTemplate = `## 가이드
 
 위에서 설정한 스텝을 어디에 위치할지 정해주셔야해요 !  
 **[STEP-(number)]** 와 같은 형식으로 (number) 안에 스텝의 숫자를 작성하면 해당 위치에 스텝에 위치합니다.
@@ -208,6 +209,9 @@ function SetStepView({ data, setData }: any) {
     </>
   );
 }
+
+type langType = "python" | "javascript" | "typescript";
+
 function GuideUploadPage() {
   const [data, setData] = useState<StepColumn[]>([
     {
@@ -226,9 +230,7 @@ function GuideUploadPage() {
 
   const [value, setValue] = React.useState(guideTemplate);
   const [selectLevel, setLevel] = React.useState<1 | 2 | 3>(1);
-  const [selectLang, setLang] = React.useState<
-    "python" | "javascript" | "typescript"
-  >("python");
+  const [selectLang, setLang] = React.useState<langType>("python");
   return (
     <Padding>
       <div>
@@ -249,65 +251,30 @@ function GuideUploadPage() {
             가이드 언어 설정
           </label>
           <div className="flex gap-5 mb-3">
-            <div
-              className={classNames(
-                "cursor-pointer",
-                selectLang === "python" && "opacity-50"
-              )}
-              onClick={() => setLang("python")}
-            >
-              <Language lang="python" />
-            </div>
-            <div
-              className={classNames(
-                "cursor-pointer",
-                selectLang === "javascript" && "opacity-50"
-              )}
-              onClick={() => setLang("javascript")}
-            >
-              <Language lang="javascript" />
-            </div>
-            <div
-              className={classNames(
-                "cursor-pointer",
-                selectLang === "typescript" && "opacity-50"
-              )}
-              onClick={() => setLang("typescript")}
-            >
-              <Language lang="typescript" />
-            </div>
+            {(["python", "javascript", "typescript"] as langType[]).map(
+              (lang) => (
+                <ClickableOpacity
+                  clicked={selectLang === lang}
+                  onClick={() => setLang(lang)}
+                >
+                  <Language lang={lang} />
+                </ClickableOpacity>
+              )
+            )}
           </div>
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
             가이드 레벨 설정
           </label>
           <div className="flex gap-5 mb-3">
-            <div
-              className={classNames(
-                "cursor-pointer",
-                selectLevel === 1 && "opacity-50"
-              )}
-              onClick={() => setLevel(1)}
-            >
-              <Level level={1} />
-            </div>
-            <div
-              className={classNames(
-                "cursor-pointer",
-                selectLevel === 2 && "opacity-50"
-              )}
-              onClick={() => setLevel(2)}
-            >
-              <Level level={2} />
-            </div>
-            <div
-              className={classNames(
-                "cursor-pointer",
-                selectLevel === 3 && "opacity-50"
-              )}
-              onClick={() => setLevel(3)}
-            >
-              <Level level={3} />
-            </div>
+            {[1 as const, 2 as const, 3 as const].map((level) => (
+              <ClickableOpacity
+                key={`level-${level}`}
+                clicked={selectLevel === level}
+                onClick={() => setLevel(level)}
+              >
+                <Level level={level} />
+              </ClickableOpacity>
+            ))}
           </div>
         </div>
       </div>
