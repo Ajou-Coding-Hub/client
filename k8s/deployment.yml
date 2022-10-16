@@ -1,40 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: react-docker-k8s
-    labels:
-        app: react-docker-k8s
+  name: ach-client-deployment
 spec:
-    replicas: 2
-    selector:
-        matchLabels:
-            app: react-docker-k8s
-    template:
-        metadata:
-        labels:
-            app: react-docker-k8s
+  selector:
+    matchLabels:
+      app: ach-client
+  template:
+    metadata:
+      labels:
+        app: ach-client
     spec:
-        containers:
-        -   name: react-docker-k8s
-            image: [your public docker hub name]/react-docker-k8s
-            ports:
-            -   containerPort: 80
-            resources:
-                limits:
-                    memory: '128Mi'
-                    cpu: '200m'
-            livenessProbe:
-                 httpGet:
-                     path: /index.html
-                     port: 80
-                 initialDelaySeconds: 15
-                 timeoutSeconds: 2
-                 periodSeconds: 5
-                 failureThreshold: 1
-             readinessProbe:
-                 httpGet:
-                     path: /index.html
-                     port: 80
-                 initialDelaySeconds: 15
-                 periodSeconds: 5
-                 failureThreshold: 1
+      containers:
+        - name: ach-client
+          image: ghcr.io/ajou-coding-hub/client:latest
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ach-client
+spec:
+  type: NodePort
+  selector:
+    app: ach-client
+  ports:
+    - port: 80
+      nodePort: 30000
