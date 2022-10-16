@@ -27,6 +27,16 @@ jobs:
                     "title": "Status",
                     "short": true,
                     "value": "In Progress"
+                  },
+                  {
+                    "title": "URL",
+                    "short": true,
+                    "value": "${{ github.server_url }}/${{ github.repository }}"
+                  },
+                  {
+                    "title": "Ref",
+                    "short": true,
+                    "value": "${{ github.ref }}"
                   }
                 ]
               }
