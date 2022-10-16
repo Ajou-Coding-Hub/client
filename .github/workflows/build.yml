@@ -103,6 +103,16 @@ jobs:
                     "title": "Status",
                     "short": true,
                     "value": "Error"
+                  },
+                  {
+                    "title": "URL",
+                    "short": true,
+                    "value": "${{ github.server_url }}/${{ github.repository }}"
+                  },
+                  {
+                    "title": "Ref",
+                    "short": true,
+                    "value": "${{ github.ref }}"
                   }
                 ]
               }
@@ -130,6 +140,16 @@ jobs:
                     "title": "Status",
                     "short": true,
                     "value": "Completed"
+                  },
+                  {
+                    "title": "URL",
+                    "short": true,
+                    "value": "${{ github.server_url }}/${{ github.repository }}"
+                  },
+                  {
+                    "title": "Ref",
+                    "short": true,
+                    "value": "${{ github.ref }}"
                   }
                 ]
               }
