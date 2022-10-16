@@ -37,6 +37,11 @@ jobs:
                     "title": "Ref",
                     "short": true,
                     "value": "${{ github.ref }}"
+                  },
+                  {
+                    "title": "Sha",
+                    "short": true,
+                    "value": "${{ github.sha }}"
                   }
                 ]
               }
@@ -113,6 +118,11 @@ jobs:
                     "title": "Ref",
                     "short": true,
                     "value": "${{ github.ref }}"
+                  },
+                  {
+                    "title": "Sha",
+                    "short": true,
+                    "value": "${{ github.sha }}"
                   }
                 ]
               }
@@ -150,6 +160,11 @@ jobs:
                     "title": "Ref",
                     "short": true,
                     "value": "${{ github.ref }}"
+                  },
+                  {
+                    "title": "Sha",
+                    "short": true,
+                    "value": "${{ github.sha }}"
                   }
                 ]
               }
