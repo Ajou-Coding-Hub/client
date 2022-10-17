@@ -42,6 +42,10 @@ jobs:
                     "title": "Sha",
                     "short": true,
                     "value": "${{ github.sha }}"
+                  },
+                  {
+                    "title": "Commits",
+                    "value": "${{ github.event.push.commits[][message] }}"
                   }
                 ]
               }
