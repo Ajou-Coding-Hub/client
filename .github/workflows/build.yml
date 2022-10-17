@@ -45,7 +45,7 @@ jobs:
                   },
                   {
                     "title": "Commits",
-                    "value": "${{ github.event.push.commits.*.message }}"
+                    "value": "${{ join(github.event.push.commits.*.message, '\n') }}"
                   }
                 ]
               }
