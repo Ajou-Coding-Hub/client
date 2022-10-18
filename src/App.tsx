@@ -5,6 +5,7 @@ import GuideSolvingPage from "@/pages/GuideSolvingPage";
 import GuidePage from "@/pages/GuidePage";
 import ProjectPage from "@/pages/ProjectPage";
 import GuideUploadPage from "./pages/GuideUploadPage";
+import CreateContainerPage from "./pages/CreateContainerPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<GuidePage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/container" element={<CreateContainerPage />} />
         </Routes>
       </div>
     </BrowserRouter>
