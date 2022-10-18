@@ -249,16 +249,16 @@ function GuideUploadPage() {
             가이드 언어 설정
           </label>
           <div className="flex gap-5 mb-3">
-            {(["python", "javascript", "typescript"] as GuideLangType[]).map(
-              (lang) => (
-                <ClickableOpacity
-                  clicked={selectLang === lang}
-                  onClick={() => setLang(lang)}
-                >
-                  <Language lang={lang} />
-                </ClickableOpacity>
-              )
-            )}
+            {(
+              ["python", "javascript", "typescript", "react"] as GuideLangType[]
+            ).map((lang) => (
+              <ClickableOpacity
+                clicked={selectLang === lang}
+                onClick={() => setLang(lang)}
+              >
+                <Language lang={lang} />
+              </ClickableOpacity>
+            ))}
           </div>
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
             가이드 레벨 설정

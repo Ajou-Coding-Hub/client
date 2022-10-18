@@ -13,7 +13,7 @@ export type OpacityType =
   | 90
   | 100;
 
-export type GuideLangType = "python" | "javascript" | "typescript";
+export type GuideLangType = "python" | "javascript" | "typescript" | "react";
 export type ProjectLangType = "python" | "node" | "java";
 
 export type ContainerStatus = "progress" | "suspense" | "idle";

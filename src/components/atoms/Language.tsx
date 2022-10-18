@@ -22,10 +22,10 @@
 
 import { classNames } from "@/utils/class";
 import { useMemo } from "react";
-import { SiJavascript, SiPython, SiTypescript } from "react-icons/si";
+import { SiJavascript, SiPython, SiReact, SiTypescript } from "react-icons/si";
 
 interface LanguageProps {
-  lang: "python" | "javascript" | "typescript";
+  lang: "python" | "javascript" | "typescript" | "react";
 }
 function Language({ lang }: LanguageProps) {
   const langPrimaryColor = useMemo(() => {
@@ -36,6 +36,8 @@ function Language({ lang }: LanguageProps) {
         return "bg-blue-500";
       case "python":
         return "bg-indigo-500";
+      case "react":
+        return "bg-cyan-400";
     }
   }, [lang]);
 
@@ -47,6 +49,8 @@ function Language({ lang }: LanguageProps) {
         return <SiTypescript className="text-[24px]" />;
       case "python":
         return <SiPython className="text-[24px]" />;
+      case "react":
+        return <SiReact className="text-[24px]" />;
     }
   }, [lang]);
 
