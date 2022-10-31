@@ -13,12 +13,10 @@ spec:
     spec:
       containers:
         - name: ach-client
-          image: ghcr.io/ajou-coding-hub/client:latest
+          image: localhost:32000/client:latest
           ports:
             - containerPort: 80
           imagePullPolicy: Always
-      imagePullSecrets:
-        - name: ghcr-login-secret
 
 ---
 apiVersion: v1
