@@ -59,7 +59,7 @@ jobs:
     - name: Set up Docker Context for Buildx
       id: buildx-context
       run: |
-        docker context create builder
+        docker context create builders
 
 
     - name: Set up Docker Buildx
