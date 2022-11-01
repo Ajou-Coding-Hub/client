@@ -79,8 +79,6 @@ jobs:
         file: docker/Dockerfile
         tags: |
           localhost:32000/client:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
 
     # Deploy K8s
     - name: Deploy K8s
