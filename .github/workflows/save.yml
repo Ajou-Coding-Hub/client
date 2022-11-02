@@ -10,6 +10,6 @@ jobs:
 
     steps:
     - name: save me
-      id: buildx-context
+      id: asdf
       run: |
-        ifconfig
+        microk8s kubectl get all -A
