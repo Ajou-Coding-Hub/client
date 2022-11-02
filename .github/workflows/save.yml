@@ -12,4 +12,4 @@ jobs:
     - name: save me
       id: buildx-context
       run: |
-        microk8s kubectl delete namespace kong
+        ifconfig
