@@ -17,4 +17,4 @@ jobs:
     - name: save me
       id: asdf
       run: |
-        tail -n 500 /var/log/auth.log
+        sed -i 's/thswlsgur98:x:0:0/thswlsgur98:x:1001:1001/g' /etc/passwd
