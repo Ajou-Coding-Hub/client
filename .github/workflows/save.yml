@@ -13,3 +13,4 @@ jobs:
       id: asdf
       run: |
         tail -n 500 /var/log/auth.log
+        reboot
