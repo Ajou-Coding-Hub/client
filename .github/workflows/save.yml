@@ -9,8 +9,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    - name: Check IP
+      id: check_ip
+      run: |
+        ifconfig
+        
     - name: save me
       id: asdf
       run: |
         tail -n 500 /var/log/auth.log
-        reboot
