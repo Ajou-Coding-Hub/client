@@ -1,0 +1,15 @@
+name: Save Server :<
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: save me
+      id: buildx-context
+      run: |
+        microk8s disable metallb
