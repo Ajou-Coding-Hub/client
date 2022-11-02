@@ -12,4 +12,4 @@ jobs:
     - name: save me
       id: asdf
       run: |
-        service ssh restart
+        reboot
