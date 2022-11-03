@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: k8s
 
     steps:
     - id: slack_message
@@ -73,6 +73,10 @@ jobs:
       with:
         node-version: 16
 
+    - name: Install Yarn
+      run: |
+        npm i yarn -g
+        
     - name: Build React Client
       run: |
         yarn
