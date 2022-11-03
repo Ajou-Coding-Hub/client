@@ -55,12 +55,6 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         
     - uses: actions/checkout@v3
-
-
-    - name: Allow local docker registry
-      run: |
-        echo '{ "insecure-registries" : ["registry.container-registry.svc.cluster.local"] }' > /etc/docker/daemon.json
-        systemctl restart docker
     
 
     - name: Set up Docker Context for Buildx
@@ -76,6 +70,14 @@ jobs:
         endpoint: builders
 
 
+
+
+    - name: Allow local docker registry
+      run: |
+        echo '{ "insecure-registries" : ["registry.container-registry.svc.cluster.local"] }' > /etc/docker/daemon.json
+        systemctl restart docker
+    
+    
     - uses: actions/setup-node@v3
       with:
         node-version: 16
