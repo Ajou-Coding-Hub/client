@@ -1,32 +1,52 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: client
+  namespace: ajou-coding-hub
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+               name: client
+               port:
+                 number: 80
+---   
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ach-client-deployment
+  name: client
+  namespace: ajou-coding-hub
 spec:
   selector:
     matchLabels:
-      app: ach-client
+      app: client
   template:
     metadata:
       labels:
-        app: ach-client
+        app: client
     spec:
       containers:
-        - name: ach-client
+        - name: client
           image: localhost:32000/client:latest
           ports:
             - containerPort: 80
           imagePullPolicy: Always
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ach-client
+  name: client
+  namespace: ajou-coding-hub
 spec:
-  type: NodePort
   selector:
-    app: ach-client
+    app: client
   ports:
-    - port: 80
-      nodePort: 30000
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80
+    targetPort: 80
