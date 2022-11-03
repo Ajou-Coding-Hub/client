@@ -69,7 +69,7 @@ jobs:
         version: latest
         endpoint: builders
         config-inline: |
-          [registry."registry.container-registry.svc.cluster.local"]
+          [registry."registry.container-registry.svc.cluster.local:5000"]
             http = true
             insecure = true
     
@@ -88,7 +88,7 @@ jobs:
 
     # Create & Push docker image
     - name: Build and push Docker Image
-      uses: docker/build-push-action@v2 
+      uses: docker/build-push-action@v3
       with:
         push: true
         context: .
