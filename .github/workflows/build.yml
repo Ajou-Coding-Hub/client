@@ -68,15 +68,10 @@ jobs:
       with:
         version: latest
         endpoint: builders
-
-
-
-
-    - name: Allow local docker registry
-      run: |
-        echo '{ "insecure-registries" : ["registry.container-registry.svc.cluster.local"] }' > /etc/docker/daemon.json
-        systemctl restart docker
-    
+        config-inline: |
+          [registry."registry.container-registry.svc.cluster.local"]
+            http = true
+            insecure = true
     
     - uses: actions/setup-node@v3
       with:
@@ -100,6 +95,8 @@ jobs:
         file: docker/Dockerfile
         tags: |
           registry.container-registry.svc.cluster.local:5000/client:latest
+        cache-from: type=registry,ref=registry.container-registry.svc.cluster.local:5000/client:buildcache
+        cache-to: type=registry,ref=registry.container-registry.svc.cluster.local:5000/client:buildcache,mode=max
 
     # Deploy K8s
     - name: Deploy K8s
