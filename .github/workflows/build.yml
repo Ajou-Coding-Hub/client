@@ -90,7 +90,7 @@ jobs:
         context: .
         file: docker/Dockerfile
         tags: |
-          localhost:32000/client:latest
+          registry.container-registry.svc.cluster.local:5000/client:latest
 
     # Deploy K8s
     - name: Deploy K8s
