@@ -590,6 +590,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-oauth/google@npm:latest":
+  version: 0.2.8
+  resolution: "@react-oauth/google@npm:0.2.8"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 389422596d5065489b3e24db74e9ee7d49fbac070530a271deb7ca07f013d59b5bcd64e1b3a15543eff537393ba6465526546c9edd6a29051edf3b14ed72f25b
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.0.1":
   version: 1.0.1
   resolution: "@remix-run/router@npm:1.0.1"
@@ -1440,6 +1450,7 @@ __metadata:
   dependencies:
     "@headlessui/react": latest
     "@heroicons/react": v1
+    "@react-oauth/google": latest
     "@tanstack/react-table": ^8.5.15
     "@types/node": ^18.8.0
     "@types/react": ^18.0.17

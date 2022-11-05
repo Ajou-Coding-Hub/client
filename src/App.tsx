@@ -6,24 +6,27 @@ import GuidePage from "@/pages/GuidePage";
 import ProjectPage from "@/pages/ProjectPage";
 import GuideUploadPage from "./pages/GuideUploadPage";
 import CreateContainerPage from "./pages/CreateContainerPage";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <div className="h-[calc(100vh_-_64px)]">
-        <Routes>
-          <Route path="/" element={<ProjectPage />} />
-          <Route path="guide">
-            <Route path="upload" element={<GuideUploadPage />} />
-            <Route path=":problemId" element={<GuideSolvingPage />} />
-            <Route index element={<GuidePage />} />
-          </Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/container" element={<CreateContainerPage />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
+      <BrowserRouter>
+        <Header />
+        <div className="h-[calc(100vh_-_64px)]">
+          <Routes>
+            <Route path="/" element={<ProjectPage />} />
+            <Route path="guide">
+              <Route path="upload" element={<GuideUploadPage />} />
+              <Route path=":problemId" element={<GuideSolvingPage />} />
+              <Route index element={<GuidePage />} />
+            </Route>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/container" element={<CreateContainerPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 }
 

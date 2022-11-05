@@ -3,21 +3,26 @@ import useStep from "@/hooks/useStep";
 import GuideMarkdown from "@/components/organisms/GuideMarkdown";
 
 /** 임시 데이터 */
-const vscodeUrl =
-  "https://jupyter.ajou.ac.kr/code/gron1gh1/code/?folder=/home/gron1gh1/workspace";
+const vscodeUrl = "http://localhost:8443/";
 
-const USER_NAME = "gron1gh1";
+const USER_NAME = "workspace";
 
 // --------
 const markdown = `
-## 자바스크립트 기초
-asd
+## 가이드
 
-[STEP-1]  
-asd
+위에서 설정한 스텝을 어디에 위치할지 정해주셔야해요 !  
+**[STEP-(number)]** 와 같은 형식으로 (number) 안에 스텝의 숫자를 작성하면 해당 위치에 스텝에 위치합니다.
 
-[STEP-2]  
-* 문제를 풀어봅시다
+* example  
+
+[STEP-1] 
+
+이런식으로 렌더링을 테스트 해볼 수 있습니다 !
+
+[STEP-2]
+
+### 이제 시작해보세요 !
 `;
 
 function GuideSolvingPage() {
