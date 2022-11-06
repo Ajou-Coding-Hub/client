@@ -3,10 +3,11 @@
 FROM node:16 AS builder
 
 # Install app dependencies
+COPY package.json yarn.lock ./
 RUN yarn install
 
+COPY . .
 RUN yarn run build
-
 
 ## STAGE 2
 ### Build Nginx
