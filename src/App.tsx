@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Header from "@/components/organisms/Header";
-import LoginPage from "@/pages/LoginPage";
 import GuideSolvingPage from "@/pages/GuideSolvingPage";
 import GuidePage from "@/pages/GuidePage";
 import ProjectPage from "@/pages/ProjectPage";
@@ -21,7 +20,6 @@ function App() {
               <Route path=":problemId" element={<GuideSolvingPage />} />
               <Route index element={<GuidePage />} />
             </Route>
-            <Route path="/login" element={<LoginPage />} />
             <Route path="/container" element={<CreateContainerPage />} />
           </Routes>
         </div>

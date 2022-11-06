@@ -27,7 +27,8 @@
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "socket.io-client": "^4.5.2",
-    "video.js": "^7.20.3"
+    "video.js": "^7.20.3",
+    "zustand": "^4.1.4"
   },
   "devDependencies": {
     "@types/node": "^18.8.0",
