@@ -9,6 +9,10 @@ jobs:
     runs-on: k8s
 
     steps:
+    - name: Get short SHA
+      id: slug
+      run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
+
     - id: slack_message
       uses: slackapi/slack-github-action@v1.23.0
       with:
@@ -94,14 +98,14 @@ jobs:
         context: .
         file: docker/Dockerfile
         tags: |
-          registry.container-registry.svc.cluster.local:5000/client:latest
+          registry.container-registry.svc.cluster.local:5000/client:${{ steps.slug.outputs.sha7 }}
         cache-from: type=registry,ref=registry.container-registry.svc.cluster.local:5000/client:buildcache
         cache-to: type=registry,ref=registry.container-registry.svc.cluster.local:5000/client:buildcache,mode=max
 
-    # Deploy K8s
-    - name: Deploy K8s
+      # Deploy K8s
+    - name: Deploy
       run: |
-        microk8s kubectl apply -f ./k8s/deployment.yml
+        helm upgrade logic-server ./infra/helm/client --set image.tag=${{ steps.slug.outputs.sha7 }} --namespace ajou-coding-hub --install
 
 
     - name: onFailure
