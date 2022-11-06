@@ -66,6 +66,7 @@ function ProjectPage() {
         <CreateContanerBox />
         {containers.map((container, i) => (
           <ContainerBox
+            key={`container-${i}`}
             {...container}
             onProgress={() => {
               setContainers((_containers) => {
