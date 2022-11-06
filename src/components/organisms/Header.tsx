@@ -4,8 +4,8 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { classNames } from "@/utils/class";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import { useAuth } from "@/store";
+import request from "@/apis";
 
 function Profile() {
   const { profile, logout } = useAuth((state) => state);
@@ -83,7 +83,7 @@ function Header() {
   );
 
   const handleGoogleLogin = useCallback(async (accessToken: string) => {
-    const response = await axios.post("http://localhost:3000/auth/login", {
+    const response = await request.post("/auth/login", {
       accessToken,
     });
     if (response.status === 201) {
