@@ -92,7 +92,7 @@ jobs:
       # Deploy K8s
     - name: Deploy
       run: |
-        helm upgrade logic-server ./infra/helm/client --set image.tag=${{ steps.slug.outputs.sha7 }} --namespace ajou-coding-hub --install
+        helm upgrade client ./infra/helm/client --set image.tag=${{ steps.slug.outputs.sha7 }} --namespace ajou-coding-hub --install
 
 
     - name: onFailure
