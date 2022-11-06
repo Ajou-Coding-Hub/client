@@ -3,7 +3,8 @@
 FROM node:16 AS builder
 
 # Copy Yarn Things
-COPY .yarn .yarnrc.yml ./
+COPY .yarn ./
+COPY .yarnrc.yml ./
 
 # Install app dependencies
 COPY package.json yarn.lock ./
