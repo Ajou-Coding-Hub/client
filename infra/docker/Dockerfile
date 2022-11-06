@@ -2,8 +2,10 @@
 ### Build React
 FROM node:16 AS builder
 
+WORKDIR /usr/src/app
+
 # Copy Yarn Things
-COPY .yarn ./
+COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
 # Install app dependencies
