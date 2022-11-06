@@ -75,19 +75,7 @@ jobs:
         config-inline: |
           [registry."registry.container-registry.svc.cluster.local:5000"]
             http = true
-    
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
 
-    - name: Install Yarn
-      run: |
-        npm i yarn -g
-        
-    - name: Build React Client
-      run: |
-        yarn
-        yarn run build
 
     # Create & Push docker image
     - name: Build and push Docker Image
