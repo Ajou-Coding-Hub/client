@@ -2,6 +2,9 @@
 ### Build React
 FROM node:16 AS builder
 
+# Copy Yarn Things
+COPY .yarn .yarnrc.yml ./
+
 # Install app dependencies
 COPY package.json yarn.lock ./
 RUN yarn install
