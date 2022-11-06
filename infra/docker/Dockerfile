@@ -1,6 +1,7 @@
 ## STAGE 1
 ### Build React
 FROM node:16 AS builder
+ENV NODE_ENV production
 
 WORKDIR /usr/src/app
 
@@ -19,7 +20,7 @@ RUN yarn run build
 ### Build Nginx
 FROM nginx:latest
 
-COPY --from=builder ./dist /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
