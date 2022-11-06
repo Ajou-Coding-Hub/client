@@ -40,12 +40,23 @@ function Profile() {
         >
           <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
             <Menu.Item>
+              <div className="px-3 py-5 flex flex-col gap-3 justify-center items-center">
+                <img
+                  className="h-16 w-16 rounded-full"
+                  src={profile.picture}
+                  alt=""
+                />
+                <p className="text-xs">{profile.email}</p>
+                <p className="text-sm">{profile.name}님 환영합니다</p>
+              </div>
+            </Menu.Item>
+            <Menu.Item>
               {({ active }) => (
                 <p
                   onClick={() => logout()}
                   className={classNames(
                     active ? "bg-gray-100" : "",
-                    "block px-4 py-2 text-sm text-gray-700"
+                    "cursor-pointer block px-4 py-2 text-sm text-gray-700 text-center"
                   )}
                 >
                   Sign out
