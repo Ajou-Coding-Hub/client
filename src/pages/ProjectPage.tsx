@@ -1,16 +1,10 @@
-/* This example requires Tailwind CSS v2.0+ */
-import Button from "@/components/atoms/Button";
 import Padding from "@/components/atoms/Padding";
-import TouchableOpacity from "@/components/atoms/TouchableOpacity";
-import { TerminalIcon, CubeTransparentIcon } from "@heroicons/react/outline";
-import { SiNodedotjs } from "react-icons/si";
-import { BsFillTrashFill } from "react-icons/bs";
-import { BiSubdirectoryRight } from "react-icons/bi";
 import ContainerBox, {
   ContainerBoxProps,
 } from "@/components/organisms/ContainerBox";
 import { useState } from "react";
 import CreateContanerBox from "@/components/organisms/CreateContanerBox";
+import request from "@/apis";
 
 const containerData: ContainerBoxProps[] = [
   {
@@ -69,6 +63,7 @@ function ProjectPage() {
             key={`container-${i}`}
             {...container}
             onProgress={() => {
+              request.post("/test").then((v) => alert(v.data));
               setContainers((_containers) => {
                 const copy = [..._containers];
                 copy[i].progress = true;

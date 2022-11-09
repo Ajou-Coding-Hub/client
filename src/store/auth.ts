@@ -10,18 +10,18 @@ type ProfileType = {
 };
 
 interface IAuth {
-  jwtToken: string;
+  token: string;
   refreshToken: string;
   isLoggedin: boolean;
   profile: ProfileType;
   setProfile: (profile: ProfileType) => void;
-  setJwtToken: (token: string) => void;
+  setToken: (token: string, refreshToken: string) => void;
   logout: () => void;
 }
 
-const store = persist(
+const store = persist<IAuth>(
   (set) => ({
-    jwtToken: "",
+    token: "",
     refreshToken: "",
     isLoggedin: false,
     profile: {
@@ -34,14 +34,15 @@ const store = persist(
       set({
         profile,
       }),
-    setJwtToken: (token: string) =>
+    setToken: (token: string, refreshToken: string) =>
       set({
-        jwtToken: token,
+        token,
+        refreshToken,
         isLoggedin: true,
       }),
     logout: () => {
       set({
-        jwtToken: "",
+        token: "",
         refreshToken: "",
         isLoggedin: false,
         profile: {

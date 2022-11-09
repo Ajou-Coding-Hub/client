@@ -72,7 +72,7 @@ function Profile() {
 
 function Header() {
   const location = useLocation();
-  const { isLoggedin, setJwtToken, setProfile } = useAuth((state) => state);
+  const { isLoggedin, setToken, setProfile } = useAuth((state) => state);
 
   const currentPathClass = useCallback(
     (path: string) =>
@@ -87,8 +87,8 @@ function Header() {
       accessToken,
     });
     if (response.status === 201) {
-      const { token, profile } = response.data;
-      setJwtToken(token);
+      const { token, refreshToken, profile } = response.data;
+      setToken(token, refreshToken);
       setProfile(profile);
     }
   }, []);
