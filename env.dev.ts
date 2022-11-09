@@ -1,6 +1,6 @@
 const env = Object.freeze({
   "import.meta.env.GOOGLE_CLIENT_ID":
-    "'978103275596-09ie0tukitjo0qc149ns5ovfgcu6e47g.apps.googleusercontent.com'",
+    "'813294973080-4lete6gvepr6hk75gppib6rfpiuig6a8.apps.googleusercontent.com'",
   "import.meta.env.API_HOST": "'https://api.ajou.codes'",
 });
 
