@@ -29,7 +29,6 @@ const getRefreshToken = async (token: string) => {
     });
     return data.token;
   }
-  return "";
 };
 
 request.interceptors.request.use(async (request) => {
@@ -40,16 +39,16 @@ request.interceptors.request.use(async (request) => {
       Authorization: `Bearer ${token}`,
     };
   } else {
-    const newToken = await getRefreshToken(refreshToken);
-    console.warn("[AUTH] token expired; request refreshToken");
-    if (newToken) {
+    try {
+      const newToken = await getRefreshToken(refreshToken);
+      console.warn("[AUTH] token expired; request refreshToken");
       useAuth.setState({
         token: newToken,
       });
       request.headers = {
         Authorization: `Bearer ${newToken}`,
       };
-    } else {
+    } catch (e) {
       console.error("[AUTH] token expired; request refreshToken");
       useAuth.getState().logout();
       throw new Error("[AUTH] refresh token fail ! logout");
