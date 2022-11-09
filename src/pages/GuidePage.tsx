@@ -55,14 +55,14 @@ function GuideCarousel() {
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 mb-10">
       <Carousel>
         <img
-          src="/new.png"
-          alt="new"
-          className="object-contain h-full bg-[#3949AB]"
+          src="/notice-1.png"
+          alt="notice-1"
+          className="object-contain h-full bg-[#1B2528]"
         />
         <img
-          src="/logo2.png"
-          alt="logo2"
-          className="object-contain h-full bg-[#1B2528]"
+          src="/notice-2.png"
+          alt="notice-1"
+          className="object-contain h-full bg-[#3949AB]"
         />
       </Carousel>
     </div>
