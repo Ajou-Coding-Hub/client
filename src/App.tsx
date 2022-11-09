@@ -6,8 +6,12 @@ import ProjectPage from "@/pages/ProjectPage";
 import GuideUploadPage from "./pages/GuideUploadPage";
 import CreateContainerPage from "./pages/CreateContainerPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    console.log("google", import.meta.env.GOOGLE_CLIENT_ID);
+  }, []);
   return (
     <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
       <BrowserRouter>

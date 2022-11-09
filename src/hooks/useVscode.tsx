@@ -49,7 +49,6 @@ function useVscode(joinRoom: string) {
         .replaceAll(" ", "")
         .replaceAll("\n", "");
 
-      console.log("AA", transCommand, data);
       return transCode.includes(transCommand);
     },
     [data]
