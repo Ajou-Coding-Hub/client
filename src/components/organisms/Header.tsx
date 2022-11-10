@@ -106,11 +106,13 @@ function Header() {
                     src={"/logo.png"}
                     alt="Workflow"
                   />
-                  <img
-                    className="hidden lg:block h-10 w-auto"
-                    src={"/logo.png"}
-                    alt="Workflow"
-                  />
+                  <Link to={"/"} >
+                    <img
+                        className="hidden lg:block h-10 w-auto"
+                        src={"/logo.png"}
+                        alt="Workflow"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   <Link to={"/workspace"} className={currentPathClass("/workspace")}>
