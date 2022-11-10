@@ -20,7 +20,7 @@ function App() {
         <div className="h-[calc(100vh_-_64px)]">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="project" element={<WorkspacePage />} />
+            <Route path="workspace" element={<WorkspacePage />} />
             <Route path="guide">
               <Route path="upload" element={<GuideUploadPage />} />
               <Route path=":problemId" element={<GuideSolvingPage />} />
