@@ -2,11 +2,12 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Header from "@/components/organisms/Header";
 import GuideSolvingPage from "@/pages/GuideSolvingPage";
 import GuidePage from "@/pages/GuidePage";
-import ProjectPage from "@/pages/ProjectPage";
+import WorkspacePage from "@/pages/WorkspacePage";
 import GuideUploadPage from "./pages/GuideUploadPage";
 import CreateContainerPage from "./pages/CreateContainerPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useEffect } from "react";
+import LandingPage from "@/pages/LandingPage";
 
 function App() {
   useEffect(() => {
@@ -18,7 +19,8 @@ function App() {
         <Header />
         <div className="h-[calc(100vh_-_64px)]">
           <Routes>
-            <Route path="/" element={<ProjectPage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="project" element={<WorkspacePage />} />
             <Route path="guide">
               <Route path="upload" element={<GuideUploadPage />} />
               <Route path=":problemId" element={<GuideSolvingPage />} />

@@ -51,7 +51,7 @@ const containerData: ContainerBoxProps[] = [
   },
 ];
 
-function ProjectPage() {
+function WorkspacePage() {
   const [containers, setContainers] = useState(containerData);
   return (
     <Padding>
@@ -88,4 +88,4 @@ function ProjectPage() {
   );
 }
 
-export default ProjectPage;
+export default WorkspacePage;

@@ -113,8 +113,8 @@ function Header() {
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  <Link to={"/"} className={currentPathClass("/")}>
-                    프로젝트
+                  <Link to={"/workspace"} className={currentPathClass("/workspace")}>
+                    워크스페이스
                   </Link>
                   <Link to={"/guide"} className={currentPathClass("/guide")}>
                     가이드
