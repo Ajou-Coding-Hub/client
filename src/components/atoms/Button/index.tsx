@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { CgSpinner } from "react-icons/cg";
-import "./index.css";
 interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
   type?: "primary" | "white" | "danger";
@@ -30,9 +29,9 @@ function Button({
   const themSizes = useMemo(() => {
     switch (size) {
       case "base":
-        return "";
+        return "btn--base";
       case "lg":
-        return "text-lg py-5 px-10";
+        return "btn--lg";
     }
   }, [type]);
   return (
@@ -40,7 +39,7 @@ function Button({
       {...rest}
       disabled={loading}
       className={[
-        "inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2",
+        "inline-flex items-center border border-transparent shadow-sm  leading-4 font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2",
         theme,
         loading && "opacity-50",
         themSizes,

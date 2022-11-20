@@ -1,8 +1,5 @@
 import Button from "@/components/atoms/Button";
-import { useUI } from "@/store";
-import { Carousel } from "flowbite-react";
 import { InView } from "react-intersection-observer";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const FirstStep = () => {
