@@ -31,15 +31,15 @@ function CreateContainerPage() {
 
   return (
     <Padding>
-      <h1 className="font-bold text-2xl mb-5">프로젝트 생성</h1>
+      <h1 className="font-bold text-2xl mb-5">워크스페이스 생성</h1>
       <div className="mb-5">
         <Input
-          label="프로젝트 이름"
+          label="워크스페이스 이름"
           placeholder="알파벳, 숫자, _ 만 포함해주세요."
         />
         <Input
-          label="프로젝트 설명"
-          placeholder="프로젝트에 대한 설명을 적어주세요."
+          label="워크스페이스 설명"
+          placeholder="워크스페이스에 대한 설명을 적어주세요."
         />
       </div>
       <Alert>
@@ -123,7 +123,7 @@ function CreateContainerPage() {
         </div>
       </div>
       <Button className="w-full justify-center mt-16 h-16">
-        프로젝트 생성
+        워크스페이스 생성
       </Button>
     </Padding>
   );
