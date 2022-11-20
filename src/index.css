@@ -1,11 +1,116 @@
+@import url('https://github.githubassets.com/static/fonts/alliance/Alliance-No-1-ExtraBold.woff2');
+@import url('https://github.githubassets.com/static/fonts/alliance/Alliance-No-1-Regular.woff2');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.btn--base {
-    @apply text-sm px-3 py-1;
+@layer components {
+  .text-gradient-blue-purple {
+    @apply pr-1 pb-4 -mb-4;
+    background-clip: text !important;
+    background: linear-gradient(90.91deg, #79c0ff -24.67%, #d2a8ff 53.55%);
+    -webkit-text-fill-color: transparent;
+  }
+  .shadow-overlay-card {
+    @apply relative shadow-bs-card bg-gh-overlay rounded-md select-none;
+  }
+
+  .shadow-overlay-card-after {
+    @apply absolute top-0 left-0 block h-full w-full pointer-events-none;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 1px rgb(255 255 255 / 10%);
+  }
+
+  .bg-gradient {
+    width: 100%;
+    left: 0%;
+    top: -13%;
+    transform: scale(1.7);
+  }
+
+  .minus-margin {
+    margin-right: -15%;
+    margin-left: -15%;
+    margin-top: -15%;
+  }
+
+  .revert-filter {
+    filter: brightness(0) invert(1);
+  }
+
+  .rich-text a {
+    @apply text-gh-link hover:underline cursor-pointer;
+  }
+
+  .gh-border-bottom {
+    border-bottom: 1px solid #30363d;
+  }
+
+  .gh-search-input {
+    @apply shadow-bs-card w-full px-3 placeholder:text-white h-[30px] bg-gh-tertiary align-middle rounded-md placeholder:text-sm pb-1;
+    max-width: 100%;
+    font-size: inherit;
+    border: 1px solid #57606a;
+    box-shadow: none;
+    opacity: 0.8;
+  }
+
+  .gh-search-input-icon {
+    @apply text-xs absolute rounded-sm;
+    border: 1px solid #57606a;
+    right: 6px;
+    color: #fff;
+    line-height: 1;
+    padding: 3px 6px 3px 6px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .get-started-button {
+    @apply flex justify-center items-center px-7 py-5 bg-indigo-600 mb-5 text-gh-primary rounded-lg font-bold gap-1;
+  }
+
+  .slide-border-bottom::after {
+    @apply absolute bottom-0 w-0 bg-white;
+    content: '';
+    height: 3px;
+    transition: all 0.5s ease 0s;
+  }
+
+  .slide-border-bottom:hover::after {
+    @apply w-full;
+  }
+
+  /* Scroll Animations */
+  .slide-left-before {
+    @apply opacity-0 left-10 transition-all duration-500 ease-in-out;
+  }
+
+  .slide-left-after {
+    @apply opacity-100 left-0 transition-all duration-500 ease-in-out;
+  }
+
+  .slide-right-before {
+    @apply opacity-0 right-10 transition-all duration-500 ease-in-out;
+  }
+
+  .slide-right-after {
+    @apply opacity-100 right-0 transition-all duration-500 ease-in-out;
+  }
 }
 
-.btn--lg {
-    @apply text-lg px-10 py-2;
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Alliance No.1', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  word-break: keep-all;
+}
+
+* {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #333333 #d2c8ff;
 }
