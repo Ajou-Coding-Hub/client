@@ -62,7 +62,7 @@ export const SectionMoreDetail = ({ data }: any) => {
         </div>
         <div className="relative mt-6 z-40" ref={morePlugin}>
           <div className="relative flex justify-between w-full gap-4 left-20">
-            {data.plugin1s.map((plugin, index) => (
+            {data.plugin1s.map((plugin: any, index: number) => (
               <div
                 key={index}
                 className={`relative ${
@@ -86,7 +86,7 @@ export const SectionMoreDetail = ({ data }: any) => {
             ))}
           </div>
           <div className="relative -right-4 flex justify-between w-full gap-4">
-            {data.plugin2s.map((plugin, index) => (
+            {data.plugin2s.map((plugin: any, index: number) => (
               <div
                 key={index}
                 className={`relative ${

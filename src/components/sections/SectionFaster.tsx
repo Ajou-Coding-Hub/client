@@ -21,7 +21,7 @@ export const SectionFaster = ({ data }: any) => {
               </p>
             </div>
             <div className="mt-10 flex w-full" ref={fasterItems}>
-              {data.stats?.map((stat, index) => (
+              {data.stats?.map((stat: any, index: number) => (
                 <div
                   key={index}
                   className={`w-1/3 relative duration-[${

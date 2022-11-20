@@ -1,6 +1,6 @@
 import { SectionEditor } from "@/components/sections/SectionEditor";
 import { SectionFirst } from "@/components/sections/SectionFirst";
-import { data } from "@/homedata";
+import { data } from "@/components/sections/data";
 import { SectionPower } from "@/components/sections/SectionPower";
 import { SectionFaster } from "@/components/sections/SectionFaster";
 import { SectionEnv } from "@/components/sections/SectionEnv";
