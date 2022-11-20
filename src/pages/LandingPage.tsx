@@ -9,7 +9,7 @@ const FirstStep = () => {
   return (
     <InView>
       {({ inView, ref, entry }) => (
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="relative flex flex-col justify-center items-center pt-24">
           <h1
             className="text-black text-7xl text-center font-extrabold"
             ref={ref}
@@ -29,10 +29,34 @@ const FirstStep = () => {
     </InView>
   );
 };
+
+const SecondStep = () => {
+  return (
+    <InView>
+      {({ inView, ref, entry }) => (
+        <div className="relative flex justify-center items-end">
+          <div />
+          <div className="relative">
+            <img
+              src="/vscode-example.webp"
+              className="relative w-[984px] h-[624px] z-10 translate-y-52"
+            />
+            <img
+              src="/glow.png"
+              className="absolute h-auto pointer-events-none w-full left-0 top-[13%] scale-[2]"
+            />
+          </div>
+          <div />
+        </div>
+      )}
+    </InView>
+  );
+};
 const LandingPage = () => {
   return (
     <div className="bg-white bg-gradient-to-b h-full">
       <FirstStep />
+      <SecondStep />
     </div>
   );
 };
