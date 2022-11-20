@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { CgSpinner } from "react-icons/cg";
 interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
-  type?: "primary" | "danger";
+  type?: "primary" | "white" | "danger";
   loading?: boolean;
 }
 
@@ -19,6 +19,8 @@ function Button({
         return " bg-indigo-600 hover:bg-indigo-700  focus:ring-indigo-500";
       case "danger":
         return " bg-red-500 hover:bg-red-700  focus:ring-red-500";
+      case "white":
+        return " bg-white hover:opacity-50 text-black";
     }
   }, [type]);
   return (
