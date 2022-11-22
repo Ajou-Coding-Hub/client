@@ -9,6 +9,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useEffect } from "react";
 import LandingPage from "@/pages/LandingPage";
 import { wrapQuery } from "@/queries";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   useEffect(() => {
@@ -31,6 +33,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      <ToastContainer />
     </GoogleOAuthProvider>
   );
 }

@@ -14,6 +14,7 @@ export interface ContainerBoxProps {
   status: WorkspaceStatus;
   lang: ProjectLangType;
   name: string;
+  description: string;
   domain?: string;
   progress?: boolean;
   onProgress?: React.MouseEventHandler<HTMLButtonElement>;
@@ -24,6 +25,7 @@ function ContainerBox({
   status,
   lang,
   name,
+  description,
   progress,
   domain,
   onProgress,
@@ -80,14 +82,19 @@ function ContainerBox({
             <SiVisualstudiocode className="text-blue-500" />
             {themeLang}
           </div>
-          <p className="flex gap-1 items-center text-sm text-left text-gray-500 mb-1">
-            Status:
+          <div className="flex gap-1 items-center text-xs text-left text-gray-500 mb-2">
+            <p>Status</p>
             <p className="text-black">{status.toLocaleUpperCase()}</p>
-          </p>
-          {domain && (
-            <p className="flex gap-1 flex-wrap items-center text-sm text-left text-gray-500">
-              Domain: <p className="text-black">{domain}</p>
-            </p>
+          </div>
+          <div className="flex flex-col gap-1 text-xs text-left text-gray-500 mb-2">
+            <p>Domain</p>
+            <p className="text-black">{domain}</p>
+          </div>
+          {description && (
+            <div className="flex flex-col gap-1 text-xs text-left text-gray-500 mb-2">
+              <p>Description</p>
+              <p className="text-black">{"ASD"}</p>
+            </div>
           )}
         </div>
         <div>

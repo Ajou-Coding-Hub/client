@@ -1,11 +1,8 @@
 import Padding from "@/components/atoms/Padding";
-import ContainerBox, {
-  ContainerBoxProps,
-} from "@/components/organisms/ContainerBox";
-import { useState } from "react";
+import ContainerBox from "@/components/organisms/ContainerBox";
 import CreateContanerBox from "@/components/organisms/CreateContanerBox";
 import { Carousel } from "flowbite-react";
-import { useWorkspaceMutate, useWorkspaceQuery } from "@/queries";
+import { useWorkspaceQuery } from "@/queries";
 
 function GuideCarousel() {
   return (
@@ -35,11 +32,13 @@ function WorkspacePage() {
       <div className="flex flex-wrap gap-5">
         <CreateContanerBox />
 
-        {/* <button onClick={() => mutate({ name: "1234" })}>asd</button>
-        {isLoading ? "ㄹ로딩중" : JSON.stringify(data)} */}
-
         {workspaceList?.map((workspace, i) => (
-          <ContainerBox key={workspace.id} {...workspace} lang="java" />
+          <ContainerBox
+            key={workspace.id}
+            {...workspace}
+            name={workspace.id}
+            lang="node"
+          />
         ))}
       </div>
     </Padding>

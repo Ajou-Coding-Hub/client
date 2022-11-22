@@ -1,12 +1,16 @@
+import request from "@/apis";
 import Button from "@/components/atoms/Button";
 import ClickableOpacity from "@/components/atoms/ClickableOpacity";
 import Language, { LangType } from "@/components/atoms/Language";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
 import { useForm } from "@/hooks/useForm";
-import { useWorkspaceMutate } from "@/queries";
+import { useWorkspaceMutate, WorkspaceType } from "@/queries";
+import { useMutation } from "@tanstack/react-query";
 import { Alert } from "flowbite-react";
 import { useCallback, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type RuntimeLangType = "blank" | "nodejs" | "python" | "java" | "golang";
 
@@ -28,21 +32,36 @@ const databasePort: Record<DatabaseType, string> = {
 };
 
 function CreateContainerPage() {
+  const navigate = useNavigate();
+
   const [runtimeLang, setRuntimeLang] = useState<RuntimeLangType>("blank");
   const [database, setDatabase] = useState<DatabaseType>("blank");
-
   const { form, handleChange } = useForm<
     Record<"name" | "description", string>
   >(["name", "description"]);
-  const {} = useWorkspaceMutate();
-
-  const createWorkspace = useCallback(() => {}, []);
 
   const deployDomain = useMemo(() => {
     return [!form.name ? "<name>" : form.name, "workspace.ajou.codes"].join(
       "."
     );
   }, [form.name]);
+
+  const { mutate } = useMutation({
+    mutationFn: (data: Pick<WorkspaceType, "name" | "description">) =>
+      request.post("/workspace", data),
+    onError() {
+      toast.error("워크스페이스 생성에 실패하였습니다.");
+    },
+    onSuccess() {
+      toast.success("워크스페이스 생성 성공");
+      navigate("/workspace");
+    },
+  });
+
+  const createWorkspace = useCallback(() => {
+    mutate(form);
+  }, [mutate, form]);
+
   return (
     <Padding>
       <h1 className="font-bold text-2xl mb-5">워크스페이스 생성</h1>
