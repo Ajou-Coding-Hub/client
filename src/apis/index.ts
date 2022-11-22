@@ -2,9 +2,7 @@ import { useAuth } from "@/store";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-export const API_HOST = !import.meta.env.DEV
-  ? import.meta.env.API_HOST
-  : "http://localhost:3000";
+export const API_HOST = import.meta.env.API_HOST;
 
 const request = axios.create({
   baseURL: API_HOST,

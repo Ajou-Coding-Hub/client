@@ -17,7 +17,7 @@ function App() {
     <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
       <BrowserRouter>
         <Header />
-        <div className="h-[calc(100vh_-_64px)]">
+        <div>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="workspace" element={<WorkspacePage />} />
