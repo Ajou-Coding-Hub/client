@@ -37,6 +37,9 @@ function WorkspacePage() {
             key={workspace.id}
             {...workspace}
             name={workspace.id}
+            onProgress={() => {
+              window.open(["https://", workspace.domain].join(""), "_blank");
+            }}
             lang="node"
           />
         ))}
