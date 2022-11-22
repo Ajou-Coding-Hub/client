@@ -52,7 +52,6 @@ function WorkspacePage() {
       <h1 className="text-2xl font-bold mb-3">모든 워크스페이스</h1>
       <div className="flex flex-wrap gap-5">
         <CreateWorkspaceBox />
-
         {workspaceList?.map((workspace, i) => (
           <WorkspaceBox
             key={workspace.id}

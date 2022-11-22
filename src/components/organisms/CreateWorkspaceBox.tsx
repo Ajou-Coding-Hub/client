@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 function CreateContanerBox({}) {
   return (
     <div className="inline-block">
-      <div className="flex flex-col justify-between w-60 h-64 rounded border border-gray-300 px-3 py-3">
+      <div className="flex flex-col justify-between w-72 h-72 rounded border border-gray-300 px-3 py-3">
         <div className="mt-3">
           <p className="text-center text-sm whitespace-pre-wrap mb-5 font-bold">
             {"워크스페이스를 직접 만들어\n배포까지 해보세요 !"}

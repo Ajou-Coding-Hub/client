@@ -70,7 +70,7 @@ function WorkspaceBox({
 
   return (
     <div className="inline-block">
-      <div className="flex flex-col justify-between w-64 h-64 rounded border border-gray-300 px-3 py-3">
+      <div className="flex flex-col justify-between w-72 h-72 rounded border border-gray-300 px-3 py-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <div
@@ -82,12 +82,12 @@ function WorkspaceBox({
             <SiVisualstudiocode className="text-blue-500" />
             {themeLang}
           </div>
-          <div className="flex gap-1 items-center text-xs text-left text-gray-500 mb-2">
-            <p>Status</p>
+          <div className="flex flex-col gap-1 text-xs text-left text-gray-500 mb-2">
+            <p className="font-bold">Status</p>
             <p className="text-black">{status.toLocaleUpperCase()}</p>
           </div>
           <div className="flex flex-col gap-1 text-xs text-left text-gray-500 mb-2">
-            <p>Domain</p>
+            <p className="font-bold">Domain</p>
             <p className="text-black">{domain}</p>
           </div>
           {description && (
@@ -110,7 +110,7 @@ function WorkspaceBox({
               워크스페이스 실행
             </Button>
             <Button type="danger" className="justify-center" onClick={onRemove}>
-              <BsFillTrashFill />
+              <BsFillTrashFill className="text-lg" />
             </Button>
           </div>
         </div>

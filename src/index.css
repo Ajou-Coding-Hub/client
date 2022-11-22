@@ -116,7 +116,7 @@ body {
 }
 
 .btn--base {
-    @apply px-2 py-2;
+    @apply text-sm px-2 py-2;
 }
 
 .btn--lg {
