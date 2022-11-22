@@ -1,11 +1,11 @@
 import request from "@/apis";
 import { useAuth } from "@/store";
-import { useGoogleLogin as useOAuthGoogleLogin } from "@react-oauth/google";
 import { useCallback } from "react";
 
 export const useGoogleLogin = () => {
   const { setToken, setProfile } = useAuth((state) => state);
   const handleGoogleLogin = useCallback(async (accessToken: string) => {
+    console.log(accessToken);
     const response = await request.post("/auth/login", {
       accessToken,
     });
@@ -16,9 +16,8 @@ export const useGoogleLogin = () => {
     }
   }, []);
 
-  const googleLogin = useOAuthGoogleLogin({
-    onSuccess: ({ access_token }) =>
-      access_token && handleGoogleLogin(access_token),
-  });
+  const googleLogin = useCallback(() => {
+    document.getElementById("button-label")?.click();
+  }, []);
   return { googleLogin, handleGoogleLogin };
 };
