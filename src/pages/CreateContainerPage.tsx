@@ -3,8 +3,10 @@ import ClickableOpacity from "@/components/atoms/ClickableOpacity";
 import Language, { LangType } from "@/components/atoms/Language";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
+import { useForm } from "@/hooks/useForm";
+import { useWorkspaceMutate } from "@/queries";
 import { Alert } from "flowbite-react";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 type RuntimeLangType = "blank" | "nodejs" | "python" | "java" | "golang";
 
@@ -26,18 +28,36 @@ const databasePort: Record<DatabaseType, string> = {
 };
 
 function CreateContainerPage() {
-  const [runtimeLang, setRuntimeLang] = useState<RuntimeLangType>("nodejs");
-  const [database, setDatabase] = useState<DatabaseType>("mariadb");
+  const [runtimeLang, setRuntimeLang] = useState<RuntimeLangType>("blank");
+  const [database, setDatabase] = useState<DatabaseType>("blank");
 
+  const { form, handleChange } = useForm<
+    Record<"name" | "description", string>
+  >(["name", "description"]);
+  const {} = useWorkspaceMutate();
+
+  const createWorkspace = useCallback(() => {}, []);
+
+  const deployDomain = useMemo(() => {
+    return [!form.name ? "<name>" : form.name, "workspace.ajou.codes"].join(
+      "."
+    );
+  }, [form.name]);
   return (
     <Padding>
       <h1 className="font-bold text-2xl mb-5">워크스페이스 생성</h1>
       <div className="mb-5">
         <Input
+          id="name"
+          value={form.name}
+          onChange={handleChange}
           label="워크스페이스 이름"
           placeholder="알파벳, 숫자, _ 만 포함해주세요."
         />
         <Input
+          id="description"
+          value={form.description}
+          onChange={handleChange}
           label="워크스페이스 설명"
           placeholder="워크스페이스에 대한 설명을 적어주세요."
         />
@@ -118,11 +138,14 @@ function CreateContainerPage() {
           </div>
           <div className="mb-1">
             <p className="text-sm text-gray-600 mb-1">배포 도메인 이름</p>
-            <p className="text-sm">{"gron1gh1.ajou.ac.kr"}</p>
+            <p className="text-sm">{deployDomain}</p>
           </div>
         </div>
       </div>
-      <Button className="w-full justify-center mt-16 h-16">
+      <Button
+        onClick={createWorkspace}
+        className="w-full justify-center mt-16 h-16"
+      >
         워크스페이스 생성
       </Button>
     </Padding>

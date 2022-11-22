@@ -6,15 +6,15 @@ import {
 } from "react-icons/si";
 import { BsFillTrashFill } from "react-icons/bs";
 import Button from "@/components/atoms/Button";
-import { ContainerStatus, ProjectLangType } from "@/types";
+import { WorkspaceStatus, ProjectLangType } from "@/types";
 import { classNames } from "@/utils/class";
 import { useMemo } from "react";
 
 export interface ContainerBoxProps {
-  status: ContainerStatus;
+  status: WorkspaceStatus;
   lang: ProjectLangType;
   name: string;
-  deployIP?: string;
+  domain?: string;
   progress?: boolean;
   onProgress?: React.MouseEventHandler<HTMLButtonElement>;
   onRemove?: React.MouseEventHandler<HTMLButtonElement>;
@@ -25,7 +25,7 @@ function ContainerBox({
   lang,
   name,
   progress,
-  deployIP,
+  domain,
   onProgress,
   onRemove,
 }: ContainerBoxProps) {
@@ -35,7 +35,7 @@ function ContainerBox({
         return "bg-gray-500";
       case "progress":
         return "bg-green-400";
-      case "suspense":
+      case "STOPPED":
         return "bg-red-600";
     }
   }, [status]);
@@ -80,12 +80,13 @@ function ContainerBox({
             <SiVisualstudiocode className="text-blue-500" />
             {themeLang}
           </div>
-          <p className="flex items-center text-sm text-left text-gray-500 mb-1">
-            Status: {status.toLocaleUpperCase()}
+          <p className="flex gap-1 items-center text-sm text-left text-gray-500 mb-1">
+            Status:
+            <p className="text-black">{status.toLocaleUpperCase()}</p>
           </p>
-          {deployIP && (
-            <p className="flex items-center text-sm text-left text-gray-500">
-              Deploy IP: {deployIP}
+          {domain && (
+            <p className="flex gap-1 flex-wrap items-center text-sm text-left text-gray-500">
+              Domain: <p className="text-black">{domain}</p>
             </p>
           )}
         </div>

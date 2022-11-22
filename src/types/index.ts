@@ -16,4 +16,4 @@ export type OpacityType =
 export type GuideLangType = "python" | "javascript" | "typescript" | "react";
 export type ProjectLangType = "python" | "node" | "java";
 
-export type ContainerStatus = "progress" | "suspense" | "idle";
+export type WorkspaceStatus = "progress" | "STOPPED" | "idle";

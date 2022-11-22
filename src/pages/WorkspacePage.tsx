@@ -4,8 +4,8 @@ import ContainerBox, {
 } from "@/components/organisms/ContainerBox";
 import { useState } from "react";
 import CreateContanerBox from "@/components/organisms/CreateContanerBox";
-import request from "@/apis";
 import { Carousel } from "flowbite-react";
+import { useWorkspaceMutate, useWorkspaceQuery } from "@/queries";
 
 function GuideCarousel() {
   return (
@@ -26,83 +26,20 @@ function GuideCarousel() {
   );
 }
 
-const containerData: ContainerBoxProps[] = [
-  {
-    status: "idle",
-    name: "React 컨테이너",
-    deployIP: "192.169.200.1",
-    lang: "node",
-    progress: false,
-  },
-  {
-    status: "progress",
-    name: "Python 컨테이너",
-    deployIP: "192.169.200.1",
-    lang: "python",
-    progress: false,
-  },
-  {
-    status: "suspense",
-    name: "Java 컨테이너",
-    deployIP: "192.169.200.1",
-    lang: "java",
-    progress: false,
-  },
-  {
-    status: "idle",
-    name: "React 컨테이너",
-    deployIP: "192.169.200.1",
-    lang: "node",
-    progress: false,
-  },
-  {
-    status: "progress",
-    name: "Python 컨테이너",
-    deployIP: "192.169.200.1",
-    lang: "python",
-    progress: false,
-  },
-  {
-    status: "suspense",
-    name: "Java 컨테이너",
-    deployIP: "192.169.200.1",
-    lang: "java",
-    progress: false,
-  },
-];
-
 function WorkspacePage() {
-  const [containers, setContainers] = useState(containerData);
+  const { data: workspaceList } = useWorkspaceQuery();
   return (
     <Padding>
       <GuideCarousel />
       <h1 className="text-2xl font-bold mb-3">모든 컨테이너</h1>
       <div className="flex flex-wrap gap-5">
         <CreateContanerBox />
-        {containers.map((container, i) => (
-          <ContainerBox
-            key={`container-${i}`}
-            {...container}
-            onProgress={() => {
-              request.post("/test").then((v) => alert(v.data));
-              setContainers((_containers) => {
-                const copy = [..._containers];
-                copy[i].progress = true;
-                console.log(copy);
-                return copy;
-              });
 
-              // 테스트 ㅋㅋ
-              setTimeout(() => {
-                setContainers((_containers) => {
-                  const copy = [..._containers];
-                  copy[i].progress = false;
-                  console.log(copy);
-                  return copy;
-                });
-              }, 1500);
-            }}
-          />
+        {/* <button onClick={() => mutate({ name: "1234" })}>asd</button>
+        {isLoading ? "ㄹ로딩중" : JSON.stringify(data)} */}
+
+        {workspaceList?.map((workspace, i) => (
+          <ContainerBox key={workspace.id} {...workspace} lang="java" />
         ))}
       </div>
     </Padding>

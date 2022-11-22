@@ -1,9 +1,8 @@
 import Button from "@/components/atoms/Button";
 import { SiVisualstudiocode } from "react-icons/si";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CreateContanerBox({}) {
-  const navigate = useNavigate();
   return (
     <div className="inline-block">
       <div className="flex flex-col justify-between w-60 h-64 rounded border border-gray-300 px-3 py-3">
@@ -15,14 +14,9 @@ function CreateContanerBox({}) {
             <SiVisualstudiocode className="text-center text-blue-500 w-24 h-24" />
           </div>
         </div>
-        <div className="flex">
-          <Button
-            onClick={() => navigate("/container")}
-            className="justify-center flex-1"
-          >
-            컨테이너 만들기
-          </Button>
-        </div>
+        <Link to="/workspace/create" className="flex">
+          <Button className="justify-center flex-1">컨테이너 만들기</Button>
+        </Link>
       </div>
     </div>
   );
