@@ -1,8 +1,13 @@
 import Padding from "@/components/atoms/Padding";
 import WorkspaceBox from "@/components/organisms/WorkspaceBox";
 import CreateWorkspaceBox from "@/components/organisms/CreateWorkspaceBox";
-import { Carousel } from "flowbite-react";
+import { Alert, Button, Carousel, Modal } from "flowbite-react";
 import { useWorkspaceQuery } from "@/queries";
+import { useMutation } from "@tanstack/react-query";
+import request from "@/apis";
+import { toast } from "react-toastify";
+import { ConfirmModal } from "@/components/molecules/ConfirmModal";
+import { useState } from "react";
 
 function GuideCarousel() {
   return (
@@ -24,7 +29,23 @@ function GuideCarousel() {
 }
 
 function WorkspacePage() {
-  const { data: workspaceList } = useWorkspaceQuery();
+  const { data: workspaceList, refetch } = useWorkspaceQuery();
+
+  const { mutate } = useMutation({
+    mutationFn: (id: string) => request.delete(["/workspace", id].join("/")),
+    onError() {
+      toast.error("워크스페이스 삭제에 실패하였습니다.");
+    },
+    onSuccess() {
+      toast.success("워크스페이스 삭제 성공");
+      refetch();
+    },
+  });
+
+  const [showModal, setShowModal] = useState({
+    id: "",
+    show: false,
+  });
   return (
     <Padding>
       <GuideCarousel />
@@ -40,9 +61,40 @@ function WorkspacePage() {
             onProgress={() => {
               window.open(["https://", workspace.domain].join(""), "_blank");
             }}
+            onRemove={() => {
+              setShowModal({
+                id: workspace.id,
+                show: true,
+              });
+            }}
             lang="node"
           />
         ))}
+        <ConfirmModal
+          show={showModal.show}
+          onClose={() =>
+            setShowModal({
+              id: "",
+              show: false,
+            })
+          }
+          onConfirm={() => {
+            mutate(showModal.id);
+            setShowModal({
+              id: "",
+              show: false,
+            });
+          }}
+          content={"정말로 해당 워크스페이스를 삭제하시겠습니까 ?"}
+          confirm={{
+            text: "삭제",
+            color: "failure",
+          }}
+          cancel={{
+            text: "취소",
+            color: "grey",
+          }}
+        />
       </div>
     </Padding>
   );

@@ -70,7 +70,7 @@ function WorkspaceBox({
 
   return (
     <div className="inline-block">
-      <div className="flex flex-col justify-between w-60 h-64 rounded border border-gray-300 px-3 py-3">
+      <div className="flex flex-col justify-between w-64 h-64 rounded border border-gray-300 px-3 py-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <div
