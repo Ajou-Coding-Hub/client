@@ -127,9 +127,10 @@ function Header() {
                   >
                     워크스페이스
                   </Link>
-                  <Link to={"/guide"} className={currentPathClass("/guide")}>
+                  {/*  @see deprecated  */}
+                  {/* <Link to={"/guide"} className={currentPathClass("/guide")}>
                     가이드
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
