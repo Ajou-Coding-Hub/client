@@ -8,6 +8,7 @@ import CreateContainerPage from "./pages/CreateContainerPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useEffect } from "react";
 import LandingPage from "@/pages/LandingPage";
+import { wrapQuery } from "@/queries";
 
 function App() {
   useEffect(() => {
@@ -21,12 +22,12 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="workspace" element={<WorkspacePage />} />
+            <Route path="workspace/create" element={<CreateContainerPage />} />
             <Route path="guide">
               <Route path="upload" element={<GuideUploadPage />} />
               <Route path=":problemId" element={<GuideSolvingPage />} />
               <Route index element={<GuidePage />} />
             </Route>
-            <Route path="/container" element={<CreateContainerPage />} />
           </Routes>
         </div>
       </BrowserRouter>
@@ -34,4 +35,4 @@ function App() {
   );
 }
 
-export default App;
+export default wrapQuery(App);

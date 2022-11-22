@@ -12,6 +12,7 @@
     "@headlessui/react": "latest",
     "@heroicons/react": "v1",
     "@react-oauth/google": "latest",
+    "@tanstack/react-query": "^4.16.1",
     "@tanstack/react-table": "^8.5.15",
     "@uiw/react-md-editor": "^3.18.2",
     "axios": "^0.27.2",
