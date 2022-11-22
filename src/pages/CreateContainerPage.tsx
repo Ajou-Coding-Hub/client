@@ -1,11 +1,11 @@
 import request from "@/apis";
 import Button from "@/components/atoms/Button";
 import ClickableOpacity from "@/components/atoms/ClickableOpacity";
-import Language, { LangType } from "@/components/atoms/Language";
+import Language from "@/components/atoms/Language";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
 import { useForm } from "@/hooks/useForm";
-import { useWorkspaceMutate, WorkspaceType } from "@/queries";
+import { WorkspaceType } from "@/queries";
 import { useMutation } from "@tanstack/react-query";
 import { Alert } from "flowbite-react";
 import { useCallback, useMemo, useState } from "react";
@@ -47,7 +47,7 @@ function CreateContainerPage() {
   }, [form.name]);
 
   const { mutate } = useMutation({
-    mutationFn: (data: Pick<WorkspaceType, "name" | "description">) =>
+    mutationFn: (data: Record<"name" | "description", string>) =>
       request.post("/workspace", data),
     onError() {
       toast.error("워크스페이스 생성에 실패하였습니다.");
