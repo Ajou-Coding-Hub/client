@@ -4,7 +4,7 @@ import { classNames } from "@/utils/class";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { useAuth, useUI } from "@/store";
-import request from "@/apis";
+import { useGoogleLogin } from "@/hooks/useGoogleLogin";
 
 function Profile() {
   const { profile, logout } = useAuth((state) => state);
@@ -64,7 +64,6 @@ function Profile() {
 function Header() {
   const { isDarkMode } = useUI();
   const location = useLocation();
-  const { isLoggedin, setToken, setProfile } = useAuth((state) => state);
 
   const currentPathClass = useCallback(
     (path: string) =>
@@ -81,17 +80,8 @@ function Header() {
     [location, isDarkMode]
   );
 
-  const handleGoogleLogin = useCallback(async (accessToken: string) => {
-    const response = await request.post("/auth/login", {
-      accessToken,
-    });
-    if (response.status === 201) {
-      const { token, refreshToken, profile } = response.data;
-      setToken(token, refreshToken);
-      setProfile(profile);
-    }
-  }, []);
-
+  const { isLoggedin } = useAuth((state) => state);
+  const { handleGoogleLogin } = useGoogleLogin();
   const LogoPath = useMemo(() => {
     return isDarkMode ? "/logo_dark.png" : "/logo.png";
   }, [isDarkMode]);

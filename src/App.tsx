@@ -11,11 +11,13 @@ import LandingPage from "@/pages/LandingPage";
 import { wrapQuery } from "@/queries";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "./store";
 
 function App() {
   useEffect(() => {
     console.log("google", import.meta.env.GOOGLE_CLIENT_ID);
   }, []);
+  const { isLoggedin } = useAuth();
   return (
     <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
       <BrowserRouter>
@@ -23,13 +25,22 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="workspace" element={<WorkspacePage />} />
-            <Route path="workspace/create" element={<CreateContainerPage />} />
-            <Route path="guide">
-              <Route path="upload" element={<GuideUploadPage />} />
-              <Route path=":problemId" element={<GuideSolvingPage />} />
-              <Route index element={<GuidePage />} />
-            </Route>
+            {isLoggedin ? (
+              <>
+                <Route path="workspace" element={<WorkspacePage />} />
+                <Route
+                  path="workspace/create"
+                  element={<CreateContainerPage />}
+                />
+                <Route path="guide">
+                  <Route path="upload" element={<GuideUploadPage />} />
+                  <Route path=":problemId" element={<GuideSolvingPage />} />
+                  <Route index element={<GuidePage />} />
+                </Route>
+              </>
+            ) : (
+              <Route path="*" element={<LandingPage />} />
+            )}
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,7 +1,21 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { useCallback } from "react";
+import { useAuth } from "@/store";
+import { useGoogleLogin } from "@/hooks/useGoogleLogin";
 
 export const SectionFirst = ({ data }: any) => {
+  const navigate = useNavigate();
+  const { isLoggedin } = useAuth();
+  const { googleLogin } = useGoogleLogin();
+
+  const handleStarted = useCallback(() => {
+    if (!isLoggedin) {
+      googleLogin();
+    }
+    navigate("/workspace");
+  }, [navigate, isLoggedin]);
+
   return (
     <div className="pt-24 pb-6 md:pb-12 px-6 flex flex-col items-center text-center">
       <h1
@@ -12,9 +26,9 @@ export const SectionFirst = ({ data }: any) => {
         개발 및 배포를 지원하는 Cloud IDE를 몇초만에 만들어줄게요 !
       </p>
       <div className="mt-6 md:mt-10 mb-6">
-        <Link to="/workspace" className="get-started-button">
+        <button onClick={handleStarted} className="get-started-button">
           Get started <IoIosArrowForward className="-mb-[3px]" />
-        </Link>
+        </button>
       </div>
     </div>
   );
