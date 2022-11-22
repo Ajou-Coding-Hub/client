@@ -1,6 +1,6 @@
 import Padding from "@/components/atoms/Padding";
-import ContainerBox from "@/components/organisms/ContainerBox";
-import CreateContanerBox from "@/components/organisms/CreateContanerBox";
+import WorkspaceBox from "@/components/organisms/WorkspaceBox";
+import CreateWorkspaceBox from "@/components/organisms/CreateWorkspaceBox";
 import { Carousel } from "flowbite-react";
 import { useWorkspaceQuery } from "@/queries";
 
@@ -28,12 +28,12 @@ function WorkspacePage() {
   return (
     <Padding>
       <GuideCarousel />
-      <h1 className="text-2xl font-bold mb-3">모든 컨테이너</h1>
+      <h1 className="text-2xl font-bold mb-3">모든 워크스페이스</h1>
       <div className="flex flex-wrap gap-5">
-        <CreateContanerBox />
+        <CreateWorkspaceBox />
 
         {workspaceList?.map((workspace, i) => (
-          <ContainerBox
+          <WorkspaceBox
             key={workspace.id}
             {...workspace}
             name={workspace.id}

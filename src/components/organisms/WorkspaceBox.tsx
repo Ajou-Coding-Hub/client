@@ -10,7 +10,7 @@ import { WorkspaceStatus, ProjectLangType } from "@/types";
 import { classNames } from "@/utils/class";
 import { useMemo } from "react";
 
-export interface ContainerBoxProps {
+export interface WorkspaceBoxProps {
   status: WorkspaceStatus;
   lang: ProjectLangType;
   name: string;
@@ -21,7 +21,7 @@ export interface ContainerBoxProps {
   onRemove?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function ContainerBox({
+function WorkspaceBox({
   status,
   lang,
   name,
@@ -30,7 +30,7 @@ function ContainerBox({
   domain,
   onProgress,
   onRemove,
-}: ContainerBoxProps) {
+}: WorkspaceBoxProps) {
   const themeStatus = useMemo(() => {
     switch (status) {
       case "idle":
@@ -107,7 +107,7 @@ function ContainerBox({
               loading={progress}
               onClick={onProgress}
             >
-              컨테이너 실행
+              워크스페이스 실행
             </Button>
             <Button type="danger" className="justify-center" onClick={onRemove}>
               <BsFillTrashFill />
@@ -119,4 +119,4 @@ function ContainerBox({
   );
 }
 
-export default ContainerBox;
+export default WorkspaceBox;

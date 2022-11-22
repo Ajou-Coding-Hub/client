@@ -5,7 +5,6 @@ import Language from "@/components/atoms/Language";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
 import { useForm } from "@/hooks/useForm";
-import { WorkspaceType } from "@/queries";
 import { useMutation } from "@tanstack/react-query";
 import { Alert } from "flowbite-react";
 import { useCallback, useMemo, useState } from "react";
@@ -13,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 type RuntimeLangType = "blank" | "nodejs" | "python" | "java" | "golang";
-
 type DatabaseType = "blank" | "postgresql" | "mysql" | "mariadb" | "mongodb";
 
 const version: Record<RuntimeLangType, string> = {
@@ -31,7 +29,7 @@ const databasePort: Record<DatabaseType, string> = {
   mongodb: "27017",
 };
 
-function CreateContainerPage() {
+function CreateWorkspacePage() {
   const navigate = useNavigate();
 
   const [runtimeLang, setRuntimeLang] = useState<RuntimeLangType>("blank");
@@ -171,4 +169,4 @@ function CreateContainerPage() {
   );
 }
 
-export default CreateContainerPage;
+export default CreateWorkspacePage;
