@@ -17,7 +17,9 @@ export const useGoogleLogin = () => {
   }, []);
 
   const googleLogin = useCallback(() => {
-    document.getElementById("button-label")?.click();
+    document
+      .querySelector<HTMLDivElement>('[aria-labelledby="button-label"]')
+      ?.click();
   }, []);
   return { googleLogin, handleGoogleLogin };
 };
