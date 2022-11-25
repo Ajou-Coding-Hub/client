@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
@@ -68,6 +69,9 @@ module.exports = {
       "gh-border": "#30363d",
     },
     extend: {
+      fontFamily: {
+        'sans': ['Gothic A1', ...defaultTheme.fontFamily.sans],
+      },
       fontSize: {
         normal: "18px",
       },
