@@ -50,6 +50,19 @@ function Profile() {
                     "cursor-pointer block px-4 py-2 text-sm text-gray-700 text-center"
                   )}
                 >
+                  Settings
+                </p>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <p
+                  onClick={() => logout()}
+                  className={classNames(
+                    active ? "bg-gray-100" : "",
+                    "cursor-pointer block px-4 py-2 text-sm text-gray-700 text-center"
+                  )}
+                >
                   Sign out
                 </p>
               )}

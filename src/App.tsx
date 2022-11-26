@@ -12,6 +12,7 @@ import { wrapQuery } from "@/queries";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "./store";
+import ValidateGithub from "./pages/ValidateGithub";
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="validate-github" element={<ValidateGithub />} />
             {isLoggedin ? (
               <>
                 <Route path="workspace" element={<WorkspacePage />} />

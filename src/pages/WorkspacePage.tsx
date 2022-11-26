@@ -8,6 +8,7 @@ import request from "@/apis";
 import { toast } from "react-toastify";
 import { ConfirmModal } from "@/components/molecules/ConfirmModal";
 import { useState } from "react";
+import github from "@/utils/github";
 
 function GuideCarousel() {
   return (
@@ -49,6 +50,7 @@ function WorkspacePage() {
   return (
     <Padding>
       <GuideCarousel />
+
       <h1 className="text-2xl font-bold mb-3">모든 워크스페이스</h1>
       <div className="flex flex-wrap gap-5">
         <CreateWorkspaceBox />
