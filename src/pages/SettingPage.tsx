@@ -6,6 +6,7 @@ import { UserIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
 import { BiGitBranch } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
+import { nanoid } from "nanoid/non-secure";
 
 export default function SettingPage({
   menu,
@@ -19,12 +20,14 @@ export default function SettingPage({
         name: "Account",
         to: "/settings/account",
         active: location.pathname === "/settings/account",
+        key: nanoid(),
       },
       {
         icon: <BiGitBranch className="w-6 h-6" />,
         name: "Integrations",
         to: "/settings/integration",
         active: location.pathname === "/settings/integration",
+        key: nanoid(),
       },
     ],
     [location]

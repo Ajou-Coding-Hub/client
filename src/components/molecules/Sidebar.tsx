@@ -8,14 +8,16 @@ interface SidebarProps {
     name: string;
     to: string;
     active: boolean;
+    key: string;
   }[];
 }
 
 export function Sidebar({ items }: SidebarProps) {
   const memoItems = useMemo(
     () =>
-      items.map(({ icon, name, to, active }, idx) => (
+      items.map(({ icon, name, to, active, key }) => (
         <li
+          key={`sidebar-${key}`}
           className={classNames(
             "rounded-lg hover:bg-gray-300 transition",
             active && "bg-gray-300"

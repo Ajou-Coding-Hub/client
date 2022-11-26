@@ -17,9 +17,7 @@ class Github {
   }
 
   closeAuth() {
-    if (this.modal) {
-      this.modal.close();
-    }
+    window.close();
   }
 }
 
