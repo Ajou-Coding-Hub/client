@@ -16,7 +16,6 @@ export default function ValidateGithub() {
         code,
       })
       .then((response) => {
-        alert("인증 성공");
         Github.closeAuth();
       })
       .catch(() => {

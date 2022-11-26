@@ -1,9 +1,11 @@
 import Ping from "@/components/atoms/Ping";
 import { DotsVerticalIcon } from "@heroicons/react/outline";
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { classNames } from "@/utils/class";
 import Github from "@/utils/github";
+import { useGithubTokenQuery } from "@/queries";
+
 function ProviderDropdown() {
   return (
     <>
@@ -44,6 +46,8 @@ function ProviderDropdown() {
 }
 
 export function IntegrationTemplate() {
+  const { data, isSuccess } = useGithubTokenQuery({ polling: true });
+
   return (
     <div>
       <h2 className="text-xl font-bold mb-1">Git Providers</h2>
@@ -53,7 +57,7 @@ export function IntegrationTemplate() {
         <div className="flex justify-between w-full">
           <div className="flex">
             <div className="flex items-center mr-5">
-              <Ping />
+              <Ping active={isSuccess} />
             </div>
             <div>
               <p>Github</p>
@@ -61,15 +65,15 @@ export function IntegrationTemplate() {
             </div>
           </div>
           <div>
-            <p>-</p>
+            <p>{isSuccess ? data.username : "-"}</p>
             <p className="text-sm text-gray-500">Username</p>
           </div>
           <div>
-            <p>-</p>
+            <p>{isSuccess ? data.email : "-"}</p>
             <p className="text-sm text-gray-500">Email</p>
           </div>
           <div>
-            <p>-</p>
+            <p>{isSuccess ? data.scope : "-"}</p>
             <p className="text-sm text-gray-500">Permissions</p>
           </div>
           <div className="flex items-center">

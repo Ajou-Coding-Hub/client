@@ -122,7 +122,6 @@ function Header() {
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 {!isLoggedin ? (
                   <GoogleLogin
-                    useOneTap
                     theme={"outline"}
                     onSuccess={({ credential }) =>
                       credential && handleGoogleLogin(credential)
