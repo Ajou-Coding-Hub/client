@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, Navigate } from "react-router-dom";
 import Header from "@/components/organisms/Header";
 import GuideSolvingPage from "@/pages/GuideSolvingPage";
 import GuidePage from "@/pages/GuidePage";
@@ -11,8 +11,9 @@ import LandingPage from "@/pages/LandingPage";
 import { wrapQuery } from "@/queries";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAuth } from "./store";
-import ValidateGithub from "./pages/ValidateGithub";
+import { useAuth } from "@/store";
+import ValidateGithub from "@/pages/ValidateGithub";
+import SettingPage from "@/pages/SettingPage";
 
 function App() {
   useEffect(() => {
@@ -29,15 +30,21 @@ function App() {
             <Route path="validate-github" element={<ValidateGithub />} />
             {isLoggedin ? (
               <>
-                <Route path="workspace" element={<WorkspacePage />} />
-                <Route
-                  path="workspace/create"
-                  element={<CreateContainerPage />}
-                />
+                <Route path="workspace">
+                  <Route path="create" element={<CreateContainerPage />} />
+                  <Route index element={<WorkspacePage />} />
+                </Route>
+
                 <Route path="guide">
                   <Route path="upload" element={<GuideUploadPage />} />
                   <Route path=":problemId" element={<GuideSolvingPage />} />
                   <Route index element={<GuidePage />} />
+                </Route>
+
+                <Route path="settings">
+                  <Route index element={<SettingPage />} />
+                  <Route path=":menu" element={<SettingPage />} />
+                  <Route path="*" element={<Navigate to="account" replace />} />
                 </Route>
               </>
             ) : (

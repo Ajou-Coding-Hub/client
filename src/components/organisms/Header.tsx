@@ -1,9 +1,9 @@
 import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { classNames } from "@/utils/class";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { useAuth, useUI } from "@/store";
+import { useAuth } from "@/store";
 import { useGoogleLogin } from "@/hooks/useGoogleLogin";
 
 function Profile() {
@@ -43,15 +43,15 @@ function Profile() {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <p
-                  onClick={() => logout()}
+                <Link
+                  to="/settings"
                   className={classNames(
                     active ? "bg-gray-100" : "",
                     "cursor-pointer block px-4 py-2 text-sm text-gray-700 text-center"
                   )}
                 >
                   Settings
-                </p>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
