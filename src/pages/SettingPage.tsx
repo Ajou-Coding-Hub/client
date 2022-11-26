@@ -1,6 +1,6 @@
 import Padding from "@/components/atoms/Padding";
 import { Sidebar } from "@/components/molecules/Sidebar";
-import { IntegrationTemplate } from "@/components/templates/SettingPage/IntergrationTemplate";
+import { IntegrationTemplate } from "@/components/templates/SettingPage/IntegrationTemplate";
 import { AccountTemplate } from "@/components/templates/SettingPage/AccountTemplate";
 import { UserIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
@@ -41,7 +41,7 @@ export default function SettingPage({
       },
       integration: {
         title: "Integrations",
-        subtitle: "Manage permissions for Git providers and intergrations.",
+        subtitle: "Manage permissions for Git providers and integrations.",
       },
     }),
     []

@@ -45,7 +45,7 @@ export const useGithubTokenQuery = ({
       return data;
     },
     ...(polling && {
-      refetchInterval: (data) => {
+      refetchInterval: (data: any) => {
         if (!data) return 2000;
         return false;
       },
