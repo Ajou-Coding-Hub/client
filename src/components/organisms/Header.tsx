@@ -62,35 +62,18 @@ function Profile() {
 }
 
 function Header() {
-  const { isDarkMode } = useUI();
   const location = useLocation();
-
   const currentPathClass = useCallback(
     (path: string) =>
-      location.pathname !== path
-        ? [
-            isDarkMode
-              ? "text-gray-300 hover:border-gray-300 hover:text-gray-400"
-              : "text-gray-500 hover:border-gray-300 hover:text-gray-700",
-            "border-transparent inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
-          ].join(" ")
-        : [
-            "border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
-          ].join(" "),
-    [location, isDarkMode]
+      location.pathname !== path ? "path--deactive" : "path--active",
+    [location]
   );
 
   const { isLoggedin } = useAuth((state) => state);
   const { handleGoogleLogin } = useGoogleLogin();
-  const LogoPath = useMemo(() => {
-    return isDarkMode ? "/logo_dark.png" : "/logo.png";
-  }, [isDarkMode]);
 
   return (
-    <Disclosure
-      as="nav"
-      className={["shadow", isDarkMode && "bg-black"].join(" ")}
-    >
+    <Disclosure as="nav" className={["shadow"].join(" ")}>
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,13 +82,13 @@ function Header() {
                 <div className="flex-shrink-0 flex items-center">
                   <img
                     className="block lg:hidden h-10 w-auto"
-                    src={LogoPath}
+                    src={"/logo.png"}
                     alt="Workflow"
                   />
                   <Link to={"/"}>
                     <img
                       className="hidden lg:block h-10 w-auto"
-                      src={LogoPath}
+                      src={"/logo.png"}
                       alt="Workflow"
                     />
                   </Link>
@@ -126,7 +109,8 @@ function Header() {
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 {!isLoggedin ? (
                   <GoogleLogin
-                    theme={isDarkMode ? "filled_black" : "outline"}
+                    useOneTap
+                    theme={"outline"}
                     onSuccess={({ credential }) =>
                       credential && handleGoogleLogin(credential)
                     }
