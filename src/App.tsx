@@ -42,9 +42,7 @@ function App() {
                 </Route>
 
                 <Route path="settings">
-                  <Route index element={<SettingPage />} />
                   <Route path=":menu" element={<SettingPage />} />
-                  <Route path="*" element={<Navigate to="account" replace />} />
                 </Route>
               </>
             ) : (
