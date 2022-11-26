@@ -44,7 +44,7 @@ function Profile() {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  to="/settings/account"
+                  to="/settings"
                   className={classNames(
                     active ? "bg-gray-100" : "",
                     "cursor-pointer block px-4 py-2 text-sm text-gray-700 text-center"

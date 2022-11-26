@@ -5,11 +5,12 @@ import { AccountTemplate } from "@/components/templates/SettingPage/AccountTempl
 import { UserIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
 import { BiGitBranch } from "react-icons/bi";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export default function SettingPage() {
+export default function SettingPage({
+  menu,
+}: Record<"menu", "account" | "integration">) {
   const location = useLocation();
-  const { menu } = useParams<Record<"menu", "account" | "integration">>();
 
   const sidebarItems = useMemo(
     () => [
@@ -43,10 +44,10 @@ export default function SettingPage() {
     []
   );
 
-  const selectHeader = useMemo(() => headerItems[menu!], [menu]);
+  const selectHeader = useMemo(() => headerItems[menu], [menu]);
 
   const selectBody = useMemo(() => {
-    switch (menu!) {
+    switch (menu) {
       case "account":
         return <AccountTemplate />;
       case "integration":
