@@ -17,14 +17,14 @@ export default function SettingPage({
     () => [
       {
         icon: <UserIcon className="w-6 h-6" />,
-        name: "Account",
+        name: "프로필",
         to: "/settings/account",
         active: location.pathname === "/settings/account",
         key: nanoid(),
       },
       {
         icon: <BiGitBranch className="w-6 h-6" />,
-        name: "Integrations",
+        name: "계정 연결",
         to: "/settings/integration",
         active: location.pathname === "/settings/integration",
         key: nanoid(),
@@ -36,12 +36,12 @@ export default function SettingPage({
   const headerItems = useMemo(
     () => ({
       account: {
-        title: "Account",
-        subtitle: "Manage account and Git configuration.",
+        title: "프로필",
+        subtitle: "계정 괸리와 Git 설정을 관리합니다.",
       },
       integration: {
-        title: "Integrations",
-        subtitle: "Manage permissions for Git providers and integrations.",
+        title: "계정 연결",
+        subtitle: "Git 공급자 및 통합에 대한 사용 권한을 관리합니다.",
       },
     }),
     []
