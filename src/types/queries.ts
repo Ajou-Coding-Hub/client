@@ -1,4 +1,4 @@
-import { WorkspaceStatus } from "./utils";
+import { WorkspaceStatus } from "./ui";
 
 export type WorkspaceType = {
   id: string;
