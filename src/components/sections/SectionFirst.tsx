@@ -3,18 +3,21 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useCallback } from "react";
 import { useAuth } from "@/store";
 import { useGoogleLogin } from "@/hooks/useGoogleLogin";
+import { GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 export const SectionFirst = ({ data }: any) => {
   const navigate = useNavigate();
   const { isLoggedin } = useAuth();
-  const { googleLogin } = useGoogleLogin();
+  const { handleGoogleLogin } = useGoogleLogin();
 
   const handleStarted = useCallback(() => {
-    if (!isLoggedin) {
-      googleLogin();
+    if (isLoggedin) {
+      navigate("/workspace");
+      return;
     }
-    navigate("/workspace");
-  }, [navigate, isLoggedin]);
+    toast.info("구글 로그인이 필요합니다.");
+  }, [navigate]);
 
   return (
     <div className="pt-24 pb-6 md:pb-12 px-6 flex flex-col items-center text-center">
