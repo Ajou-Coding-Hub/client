@@ -50,8 +50,8 @@ export function IntegrationTemplate() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-1">Git Providers</h2>
-      <p className="text-sm mb-5">Manage permissions for Git providers</p>
+      <h2 className="text-xl font-bold mb-1">Git 공급자</h2>
+      <p className="text-sm mb-5">Git 공급자를 위한 권한 관리</p>
 
       <div className="flex items-center w-full p-5">
         <div className="flex justify-between w-full">
