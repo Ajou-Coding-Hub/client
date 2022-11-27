@@ -15,6 +15,8 @@ export const useWorkspaceQuery = () => {
   return query;
 };
 
+// TODO: 급하게 개발로 임시 polling 사용
+// 팝업이 꺼지면 해당 이벤트가 팝업을 킨 부모한테 트리거가 되는 방식으로 바꿔야함
 export const useGithubTokenQuery = ({
   polling,
 }: Record<"polling", boolean>) => {

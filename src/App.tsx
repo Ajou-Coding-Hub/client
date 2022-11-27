@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "@/store";
 import ValidateGithub from "@/pages/ValidateGithub";
 import SettingPage from "@/pages/SettingPage";
+import { FeedbackPage } from "./pages/FeedbackPage";
 
 function App() {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="feedback" element={<FeedbackPage />} />
             <Route path="validate-github" element={<ValidateGithub />} />
             {isLoggedin ? (
               <>

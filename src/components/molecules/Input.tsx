@@ -1,18 +1,20 @@
 import { classNames } from "@/utils/class";
 
 interface InputProps extends React.HTMLProps<HTMLInputElement> {
-  label: string;
+  label?: string;
 }
 
 function Input({ label, id, ...rest }: InputProps) {
   return (
     <>
-      <label
-        htmlFor={id}
-        className="mt-3 block mb-2 text-sm font-medium text-gray-900"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="mt-3 block mb-2 text-sm font-medium text-gray-900"
+        >
+          {label}
+        </label>
+      )}
       <input
         type="text"
         className={classNames(

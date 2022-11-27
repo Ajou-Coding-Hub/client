@@ -113,6 +113,12 @@ function Header() {
                   >
                     워크스페이스
                   </Link>
+                  <Link
+                    to={"/feedback"}
+                    className={currentPathClass("/feedback")}
+                  >
+                    피드백
+                  </Link>
                   {/*  @see deprecated  */}
                   {/* <Link to={"/guide"} className={currentPathClass("/guide")}>
                     가이드
