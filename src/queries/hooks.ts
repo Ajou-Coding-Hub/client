@@ -1,20 +1,6 @@
 import request from "@/apis";
-import { WorkspaceStatus } from "@/types";
-import {
-  useMutation,
-  UseMutationOptions,
-  useQuery,
-} from "@tanstack/react-query";
-import { toast } from "react-toastify";
-
-export type WorkspaceType = {
-  id: string;
-  description: string;
-  ownerId: number;
-  status: WorkspaceStatus;
-  createdAt: Date;
-  domain: string;
-};
+import { GithubRepository, GithubTokenType, WorkspaceType } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 
 export const useWorkspaceQuery = () => {
   const query = useQuery(["workspace"], {
@@ -29,18 +15,30 @@ export const useWorkspaceQuery = () => {
   return query;
 };
 
-export type GithubTokenType = {
-  id: string;
-  accessToken: string;
-  scope: string;
-  email: string;
-  username: string;
-};
 export const useGithubTokenQuery = ({
   polling,
 }: Record<"polling", boolean>) => {
-  const query = useQuery(["workspace"], {
+  const query = useQuery(["github"], {
     queryFn: () => request.get<GithubTokenType>("/user/github"),
+    select({ data }) {
+      return data;
+    },
+    ...(polling && {
+      refetchInterval: (data: any) => {
+        if (!data) return 2000;
+        return false;
+      },
+      refetchIntervalInBackground: true,
+    }),
+  });
+  return query;
+};
+
+export const useRepositoriesQuery = ({
+  polling,
+}: Record<"polling", boolean>) => {
+  const query = useQuery(["repositories"], {
+    queryFn: () => request.get<GithubRepository[]>("/user/repositories"),
     select({ data }) {
       return data;
     },

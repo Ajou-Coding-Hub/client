@@ -5,12 +5,17 @@ import Language from "@/components/atoms/Language";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
 import { useForm } from "@/hooks/useForm";
+import { useRepositoriesQuery } from "@/queries";
+import { GithubRepository } from "@/types";
+import { Listbox } from "@headlessui/react";
 import { useMutation } from "@tanstack/react-query";
 import { Alert } from "flowbite-react";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { AiFillGithub } from "react-icons/ai";
+import { classNames } from "@/utils/class";
+import Github from "@/utils/github";
 type RuntimeLangType = "blank" | "nodejs" | "python" | "java" | "golang";
 type DatabaseType = "blank" | "postgresql" | "mysql" | "mariadb" | "mongodb";
 
@@ -60,6 +65,11 @@ function CreateWorkspacePage() {
     mutate(form);
   }, [mutate, form]);
 
+  const { data: repositories, isError } = useRepositoriesQuery({
+    polling: true,
+  });
+  const [selectRepository, setSelectRepository] =
+    useState<GithubRepository | null>(null);
   return (
     <Padding>
       <h1 className="font-bold text-2xl mb-5">워크스페이스 생성</h1>
@@ -85,6 +95,76 @@ function CreateWorkspacePage() {
         {"제공되는 데이터베이스를 사용하면 배포를 수월하게 진행할 수 있어요 !"}
       </Alert>
 
+      <div className="mt-5">
+        <p className="text-sm mb-2">Git 레포지토리 선택</p>
+        <div className="w-full">
+          <Listbox value={selectRepository} onChange={setSelectRepository}>
+            <Listbox.Button className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 w-full p-2.5 flex gap-2">
+              {selectRepository ? (
+                <>
+                  <AiFillGithub className="h-5 w-5" />
+                  <p className="text-left">{selectRepository?.full_name}</p>
+                </>
+              ) : (
+                <p>없음</p>
+              )}
+            </Listbox.Button>
+            <Listbox.Options
+              className={
+                "bg-white absolute mt-2 max-h-64 overflow-auto w-96 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none z-10 transform opacity-100 scale-100"
+              }
+            >
+              <Listbox.Option key={"null"} value={null}>
+                <div
+                  className={classNames(
+                    "hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700"
+                  )}
+                >
+                  <p>없음</p>
+                </div>
+              </Listbox.Option>
+              {repositories?.map((repository) => (
+                <Listbox.Option
+                  key={repository.id}
+                  value={repository}
+                  disabled={!repository.permissions.pull}
+                >
+                  <div
+                    className={classNames(
+                      "hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700",
+                      "flex gap-2 items-center"
+                    )}
+                  >
+                    {repository ? (
+                      <>
+                        <AiFillGithub className="h-5 w-5" />
+                        <p> {repository.full_name}</p>
+                      </>
+                    ) : (
+                      <p>없음</p>
+                    )}
+                  </div>
+                </Listbox.Option>
+              ))}
+              {isError && (
+                <Listbox.Option value={null}>
+                  <div
+                    className={classNames(
+                      "hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700",
+                      "flex gap-2 items-center"
+                    )}
+                    onClick={() => Github.openAuth()}
+                  >
+                    <AiFillGithub className="h-5 w-5" />
+                    <p>Github 연결하기</p>
+                  </div>
+                </Listbox.Option>
+              )}
+            </Listbox.Options>
+          </Listbox>
+        </div>
+      </div>
+
       <div className="flex gap-5 items-center">
         <div>
           <div className="mt-5">
@@ -100,6 +180,7 @@ function CreateWorkspacePage() {
                 ] as RuntimeLangType[]
               ).map((lang) => (
                 <ClickableOpacity
+                  key={`lang-${lang}`}
                   clicked={runtimeLang === lang}
                   onClick={() => setRuntimeLang(lang)}
                 >
@@ -125,6 +206,7 @@ function CreateWorkspacePage() {
                 ] as DatabaseType[]
               ).map((lang) => (
                 <ClickableOpacity
+                  key={`db-${lang}`}
                   clicked={database === lang}
                   onClick={() => setDatabase(lang)}
                 >
