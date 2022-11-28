@@ -2,9 +2,10 @@ import { classNames } from "@/utils/class";
 
 interface InputProps extends React.HTMLProps<HTMLInputElement> {
   label?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function Input({ label, id, ...rest }: InputProps) {
+function Input({ label, id, onChange, ...rest }: InputProps) {
   return (
     <>
       {label && (
@@ -22,6 +23,7 @@ function Input({ label, id, ...rest }: InputProps) {
           rest.disabled && "bg-gray-200"
         )}
         id={id}
+        onChange={onChange}
         {...rest}
       />
     </>

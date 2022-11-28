@@ -1,10 +1,13 @@
+import request from "@/apis";
 import Box from "@/components/atoms/Box";
 import Button from "@/components/atoms/Button";
 import HeartIcon from "@/components/atoms/HeartIcon";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid/non-secure";
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { toast } from "react-toastify";
 
 interface FeedbackProps {
   id: string;
@@ -72,6 +75,30 @@ const Feedback = ({
   onLike,
   likeCount,
 }: FeedbackProps) => {
+  const {
+    data,
+    fetchNextPage,
+    fetchPreviousPage,
+    hasNextPage,
+    hasPreviousPage,
+    isFetchingNextPage,
+    isFetchingPreviousPage,
+    ...result
+  } = useInfiniteQuery(["feedback"], {
+    queryFn: async ({ pageParam = 0 }) => {
+      return (
+        await request.get("/feedback", {
+          params: {
+            skip: pageParam * 20,
+            take: 20,
+          },
+        })
+      ).data;
+    },
+    // getNextPageParam: (lastPage, allPages) => lastPage,
+  });
+  console.log(data);
+
   return (
     <Box className="w-full">
       <div className="flex gap-5 items-center mb-5">
@@ -103,8 +130,32 @@ const Feedback = ({
     </Box>
   );
 };
+
 // 무한 스크롤
 const FeedbackWriter = () => {
+  const [content, setContent] = useState("");
+
+  const { mutate } = useMutation({
+    mutationFn: (data: Record<"content", string>) =>
+      request.post("/feedback", data),
+    onError() {
+      toast.error("피드백 작성에 실패하였습니다.");
+    },
+    onSuccess() {
+      toast.success("피드백 작성 성공");
+    },
+  });
+
+  const handleWrite = useCallback(() => {
+    if (!content) {
+      toast.warn("피드백이 비어있어요 !");
+    }
+
+    mutate({
+      content,
+    });
+  }, [mutate, content]);
+
   return (
     <div className="w-full mt-3 mb-5">
       <div className="flex gap-3 items-center mb-3">
@@ -123,8 +174,10 @@ const FeedbackWriter = () => {
       </div>
 
       <div className="flex gap-3">
-        <Input />
-        <Button className="w-24 justify-center">작성</Button>
+        <Input value={content} onChange={(e) => setContent(e.target.value)} />
+        <Button onClick={handleWrite} className="w-24 justify-center">
+          작성
+        </Button>
       </div>
     </div>
   );
