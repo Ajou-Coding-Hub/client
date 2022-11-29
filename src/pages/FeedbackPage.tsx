@@ -4,110 +4,42 @@ import Button from "@/components/atoms/Button";
 import HeartIcon from "@/components/atoms/HeartIcon";
 import Padding from "@/components/atoms/Padding";
 import Input from "@/components/molecules/Input";
+import { useAuth } from "@/store";
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid/non-secure";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
-interface FeedbackProps {
+interface IFeedback {
   id: string;
-  user: {
-    profileImg: string;
+  owner: {
+    picture: string;
     name: string;
   };
   content: string;
-  createdTime: Date;
+  createdAt: string;
   likeCount: number;
   onLike?: React.MouseEventHandler<HTMLDivElement>;
+  isLike?: boolean;
 }
 
-const sampleData = [
-  {
-    id: nanoid(),
-    user: {
-      profileImg:
-        "https://lh3.googleusercontent.com/a/ALm5wu11wN_BukYeweQtfKCh5-yO1Uv7Ndy6nl9GG7cf=s96-c",
-      name: "선규",
-    },
-    content: "아주코드 너무 조아요 아주코드 너무 조아요 아주코드 너무 조아요",
-    createdTime: new Date(),
-    likeCount: 1234,
-  },
-  {
-    id: nanoid(),
-    user: {
-      profileImg:
-        "https://lh3.googleusercontent.com/a/ALm5wu11wN_BukYeweQtfKCh5-yO1Uv7Ndy6nl9GG7cf=s96-c",
-      name: "선규",
-    },
-    content: "와 이거 머임 ??\n쩐다",
-    createdTime: new Date(),
-    likeCount: 1234,
-  },
-  {
-    id: nanoid(),
-    user: {
-      profileImg:
-        "https://lh3.googleusercontent.com/a/ALm5wu11wN_BukYeweQtfKCh5-yO1Uv7Ndy6nl9GG7cf=s96-c",
-      name: "선규",
-    },
-    content: "조아요",
-    createdTime: new Date(),
-    likeCount: 1234,
-  },
-  {
-    id: nanoid(),
-    user: {
-      profileImg:
-        "https://lh3.googleusercontent.com/a/ALm5wu11wN_BukYeweQtfKCh5-yO1Uv7Ndy6nl9GG7cf=s96-c",
-      name: "선규",
-    },
-    content: "아주코드 너무 조아요 아주코드 너무 조아요 아주코드 너무 조아요",
-    createdTime: new Date(),
-    likeCount: 1234,
-  },
-];
-
-const Feedback = ({
-  user,
+const Feedback: React.FC<IFeedback> = ({
   content,
-  createdTime,
-  onLike,
   likeCount,
-}: FeedbackProps) => {
-  const {
-    data,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-    ...result
-  } = useInfiniteQuery(["feedback"], {
-    queryFn: async ({ pageParam = 0 }) => {
-      return (
-        await request.get("/feedback", {
-          params: {
-            skip: pageParam * 20,
-            take: 20,
-          },
-        })
-      ).data;
-    },
-    // getNextPageParam: (lastPage, allPages) => lastPage,
-  });
-  console.log(data);
-
+  owner,
+  onLike,
+  isLike,
+}) => {
   return (
     <Box className="w-full">
       <div className="flex gap-5 items-center mb-5">
-        <img className="w-10 h-10 rounded-full" src={user.profileImg} />
+        <img className="w-10 h-10 rounded-full" src={owner.picture} />
 
         <div className="flex flex-col gap-1">
           <div className="text-sm">
             <p className="text-gray-600">
-              <b className="text-black">{user.name}</b>님이 피드백을 작성했어요.
+              <b className="text-black">{owner.name}</b>님이 피드백을
+              작성했어요.
             </p>
           </div>
           <div className="text-xs text-gray-700">아주대학교 학생</div>
@@ -124,7 +56,7 @@ const Feedback = ({
         onClick={onLike}
         className="flex gap-1 items-center select-none cursor-pointer w-fit"
       >
-        <HeartIcon className="w-6 h-6" filled />
+        <HeartIcon className="w-6 h-6" filled={isLike} />
         <p className="text-sm">{likeCount}</p>
       </div>
     </Box>
@@ -132,29 +64,18 @@ const Feedback = ({
 };
 
 // 무한 스크롤
-const FeedbackWriter = () => {
+const FeedbackWriter = ({
+  onWrite,
+}: {
+  onWrite: (content: string) => void;
+}) => {
   const [content, setContent] = useState("");
-
-  const { mutate } = useMutation({
-    mutationFn: (data: Record<"content", string>) =>
-      request.post("/feedback", data),
-    onError() {
-      toast.error("피드백 작성에 실패하였습니다.");
-    },
-    onSuccess() {
-      toast.success("피드백 작성 성공");
-    },
-  });
-
   const handleWrite = useCallback(() => {
     if (!content) {
       toast.warn("피드백이 비어있어요 !");
     }
-
-    mutate({
-      content,
-    });
-  }, [mutate, content]);
+    onWrite(content);
+  }, [onWrite, content]);
 
   return (
     <div className="w-full mt-3 mb-5">
@@ -184,12 +105,84 @@ const FeedbackWriter = () => {
 };
 
 export function FeedbackPage() {
+  const { mutateAsync: mutateFeedbackWrite } = useMutation({
+    mutationFn: (data: Record<"content", string>) =>
+      request.post("/feedback", data),
+    onError() {
+      toast.error("피드백 작성에 실패하였습니다.");
+    },
+    onSuccess() {
+      toast.success("피드백 작성 성공");
+    },
+  });
+
+  const { mutateAsync: mutateLike } = useMutation({
+    mutationFn: (feedbackId: string) =>
+      request.post(`/feedback/like/${feedbackId}`),
+    onError() {},
+    onSuccess() {
+      refetch();
+    },
+  });
+
+  const {
+    data,
+    fetchNextPage,
+    fetchPreviousPage,
+    hasNextPage,
+    hasPreviousPage,
+    isFetchingNextPage,
+    isFetchingPreviousPage,
+    refetch,
+    ...result
+  } = useInfiniteQuery(["feedback"], {
+    queryFn: async ({ pageParam = 0 }) => {
+      return (
+        await request.get("/feedback", {
+          params: {
+            skip: pageParam * 20,
+            take: 20,
+          },
+        })
+      ).data;
+    },
+    // getNextPageParam: (lastPage, allPages) => lastPage,
+  });
+
+  const { isLoggedin, getUserId } = useAuth();
+  const userId = useMemo(
+    () => (isLoggedin ? getUserId() : -1),
+    [isLoggedin, getUserId]
+  );
+
   return (
     <Padding className="flex flex-col gap-3">
-      <FeedbackWriter />
-      {sampleData.map((data) => (
-        <Feedback key={data.id} {...data} />
-      ))}
+      {isLoggedin ? (
+        <FeedbackWriter
+          onWrite={(content) =>
+            mutateFeedbackWrite({ content }).then(() => refetch())
+          }
+        />
+      ) : null}
+      {data?.pages?.flat().map((_data: any) => {
+        console.log(data?.pages, _data);
+        return (
+          <Feedback
+            key={_data.id}
+            onLike={() => {
+              if (!isLoggedin) {
+                toast.warn("로그인 후 사용 가능합니다.");
+              }
+              mutateLike(_data.id);
+            }}
+            {..._data}
+            isLike={_data.feedbackLikes.some(
+              (likes: any) => likes.likerId === userId
+            )}
+            likeCount={_data.feedbackLikes.length}
+          />
+        );
+      })}
     </Padding>
   );
 }

@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import create, { StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
 import { persist } from "zustand/middleware";
@@ -11,6 +12,7 @@ type ProfileType = {
 
 interface IAuth {
   token: string;
+  getUserId: () => number;
   refreshToken: string;
   isLoggedin: boolean;
   profile: ProfileType;
@@ -20,7 +22,7 @@ interface IAuth {
 }
 
 const store = persist<IAuth>(
-  (set) => ({
+  (set, get) => ({
     token: "",
     refreshToken: "",
     isLoggedin: false,
@@ -30,6 +32,7 @@ const store = persist<IAuth>(
       name: "",
       picture: "",
     },
+    getUserId: () => jwtDecode<Record<"userId", number>>(get().token).userId,
     setProfile: (profile: ProfileType) =>
       set({
         profile,
