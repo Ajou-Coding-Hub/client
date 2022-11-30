@@ -107,12 +107,14 @@ function Header() {
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  <Link
-                    to={"/workspace"}
-                    className={currentPathClass("/workspace")}
-                  >
-                    워크스페이스
-                  </Link>
+                  {isLoggedin ? (
+                    <Link
+                      to={"/workspace"}
+                      className={currentPathClass("/workspace")}
+                    >
+                      워크스페이스
+                    </Link>
+                  ) : null}
                   <Link
                     to={"/feedback"}
                     className={currentPathClass("/feedback")}

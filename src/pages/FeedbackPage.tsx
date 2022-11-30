@@ -9,6 +9,10 @@ import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid/non-secure";
 import React, { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import TimeAgo from "javascript-time-ago";
+import ko from "javascript-time-ago/locale/ko";
+TimeAgo.addDefaultLocale(ko);
+const timeAgo = new TimeAgo("ko-KR");
 
 interface IFeedback {
   id: string;
@@ -28,8 +32,10 @@ const Feedback: React.FC<IFeedback> = ({
   likeCount,
   owner,
   onLike,
+  createdAt,
   isLike,
 }) => {
+  const ago = useMemo(() => timeAgo.format(new Date(createdAt)), [createdAt]);
   return (
     <Box className="w-full">
       <div className="flex gap-5 items-center mb-5">
@@ -50,7 +56,7 @@ const Feedback: React.FC<IFeedback> = ({
         <p>{content}</p>
       </div>
 
-      <p className="text-xs text-gray-600 mb-1">2시간 전</p>
+      <p className="text-xs text-gray-600 mb-1">{ago}</p>
 
       <div
         onClick={onLike}
@@ -150,9 +156,12 @@ export function FeedbackPage() {
   });
 
   const { isLoggedin, getUserId } = useAuth();
-  const userId = useMemo(
-    () => (isLoggedin ? getUserId() : -1),
-    [isLoggedin, getUserId]
+
+  const isLike = useCallback(
+    (feedbackLikes: Record<"likerId", number>[]) => {
+      return feedbackLikes.find((f) => f.likerId === getUserId());
+    },
+    [getUserId]
   );
 
   return (
@@ -165,21 +174,20 @@ export function FeedbackPage() {
         />
       ) : null}
       {data?.pages?.flat().map((_data: any) => {
-        console.log(data?.pages, _data);
+        console.log(_data);
         return (
           <Feedback
             key={_data.id}
             onLike={() => {
               if (!isLoggedin) {
                 toast.warn("로그인 후 사용 가능합니다.");
+                return;
               }
               mutateLike(_data.id);
             }}
             {..._data}
-            isLike={_data.feedbackLikes.some(
-              (likes: any) => likes.likerId === userId
-            )}
-            likeCount={_data.feedbackLikes.length}
+            isLike={isLike(_data?.feedbackLikes)}
+            likeCount={_data._count.feedbackLikes}
           />
         );
       })}

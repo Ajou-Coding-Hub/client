@@ -12,7 +12,7 @@ type ProfileType = {
 
 interface IAuth {
   token: string;
-  getUserId: () => number;
+  getUserId: () => number | undefined;
   refreshToken: string;
   isLoggedin: boolean;
   profile: ProfileType;
@@ -32,7 +32,13 @@ const store = persist<IAuth>(
       name: "",
       picture: "",
     },
-    getUserId: () => jwtDecode<Record<"userId", number>>(get().token).userId,
+    getUserId: () => {
+      try {
+        return jwtDecode<Record<"userId", number>>(get().token).userId;
+      } catch (e) {
+        return undefined;
+      }
+    },
     setProfile: (profile: ProfileType) =>
       set({
         profile,
