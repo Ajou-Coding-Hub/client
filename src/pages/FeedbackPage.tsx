@@ -7,7 +7,7 @@ import Input from "@/components/molecules/Input";
 import { useAuth } from "@/store";
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid/non-secure";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import TimeAgo from "javascript-time-ago";
 import ko from "javascript-time-ago/locale/ko";
@@ -146,13 +146,16 @@ export function FeedbackPage() {
       return (
         await request.get("/feedback", {
           params: {
-            skip: pageParam * 20,
-            take: 20,
+            cursor: pageParam,
           },
         })
       ).data;
     },
-    // getNextPageParam: (lastPage, allPages) => lastPage,
+    getNextPageParam: (lastPage) => {
+      return lastPage.length < 10
+        ? undefined
+        : Math.min(...lastPage.map((v: any) => v.id));
+    },
   });
 
   const { isLoggedin, getUserId } = useAuth();
@@ -174,7 +177,6 @@ export function FeedbackPage() {
         />
       ) : null}
       {data?.pages?.flat().map((_data: any) => {
-        console.log(_data);
         return (
           <Feedback
             key={_data.id}
