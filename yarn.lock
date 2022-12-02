@@ -733,10 +733,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-virtual@npm:^3.0.0-alpha.0":
+  version: 3.0.0-beta.23
+  resolution: "@tanstack/react-virtual@npm:3.0.0-beta.23"
+  dependencies:
+    "@tanstack/virtual-core": 3.0.0-beta.23
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 07adb782da90f6bab08326d12cf711cebe7af1a54e675ab803e20826332a7e9da803b0a00a40ac8acf745b3cb6ecb6c4bf49055b98c26e0042b781dbb9b43ac0
+  languageName: node
+  linkType: hard
+
 "@tanstack/table-core@npm:8.5.15":
   version: 8.5.15
   resolution: "@tanstack/table-core@npm:8.5.15"
   checksum: 03d63e126e843375c2950809d680cd670694cfbee4e3cdc8ca463d97ba64cadd11ee9addf000ab4cb20d35ffb668df5f50cb205c594dc6ef2d0942005662d0ce
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.0.0-beta.23":
+  version: 3.0.0-beta.23
+  resolution: "@tanstack/virtual-core@npm:3.0.0-beta.23"
+  checksum: 94d1bdad239a8bfe7c013df16b97bb6525ec93f8ea5d672142a34e1a88b94d7aacecfe87966106a874a78453a4dbad0f07b9a00af28b3ee800fec5d2eb8b4a27
   languageName: node
   linkType: hard
 
@@ -1607,6 +1625,7 @@ __metadata:
     "@react-oauth/google": latest
     "@tanstack/react-query": ^4.16.1
     "@tanstack/react-table": ^8.5.15
+    "@tanstack/react-virtual": ^3.0.0-alpha.0
     "@types/node": ^18.8.0
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
