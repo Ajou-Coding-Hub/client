@@ -44,8 +44,8 @@ function CreateWorkspacePage() {
   const { mutate } = useMutation({
     mutationFn: (data: Record<"name" | "description", string>) =>
       request.post("/workspace", data),
-    onError() {
-      toast.error("워크스페이스 생성에 실패하였습니다.");
+    onError({ message }: { message?: string }) {
+      toast.error(message ?? "워크스페이스 생성 실패");
     },
     onSuccess() {
       toast.success("워크스페이스 생성 성공");
