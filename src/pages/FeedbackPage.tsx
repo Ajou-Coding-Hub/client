@@ -79,6 +79,9 @@ const FeedbackWriter = ({
 }: {
   onWrite: (content: string) => void;
 }) => {
+  const {
+    profile: { name, picture },
+  } = useAuth();
   const [content, setContent] = useState("");
   const handleWrite = useCallback(() => {
     if (!content) {
@@ -91,16 +94,11 @@ const FeedbackWriter = ({
     <Padding>
       <div className="w-full mt-3">
         <div className="flex gap-3 items-center mb-3">
-          <img
-            className="w-6 h-6 rounded-full"
-            src={
-              "https://lh3.googleusercontent.com/a/ALm5wu11wN_BukYeweQtfKCh5-yO1Uv7Ndy6nl9GG7cf=s96-c"
-            }
-          />
+          <img className="w-6 h-6 rounded-full" src={picture} />
 
           <div className="flex flex-col gap-1">
             <p className="text-gray-600 text-sm">
-              <b className="text-black">{"선규"}</b>님의 피드백
+              <b className="text-black">{name}</b>님의 피드백
             </p>
           </div>
         </div>
